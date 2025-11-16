@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - TelcoApp</title>
+    <title>Daftar - TelcoApp</title>
     <style>
         * {
             margin: 0;
@@ -21,19 +21,18 @@
             padding: 40px;
         }
 
-        .login-container {
+        .register-container {
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
             width: 100%;
-            max-width: 750px; /* dari 450px → 750px */
+            max-width: 750px;
             overflow: hidden;
             display: flex;
-            flex-direction: row; /* bikin lebih lebar horizontal */
+            flex-direction: row;
         }
 
-        /* bagian kiri (judul & deskripsi) */
-        .login-header {
+        .register-header {
             flex: 1;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -44,25 +43,26 @@
             padding: 50px 30px;
         }
 
-        .login-header h1 {
+        .register-header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
-        .login-header p {
+        .register-header p {
             opacity: 0.9;
             text-align: center;
             line-height: 1.4;
         }
 
-        /* bagian kanan (form) */
-        .login-body {
+        .register-body {
             flex: 1.2;
             padding: 60px 50px;
+            max-height: 600px;
+            overflow-y: auto;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
@@ -70,14 +70,15 @@
             margin-bottom: 8px;
             color: #333;
             font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .form-control {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 15px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
         }
 
@@ -87,36 +88,18 @@
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        .form-check {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .form-check input {
-            margin-right: 8px;
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-
-        .form-check label {
-            cursor: pointer;
-            font-size: 0.95rem;
-            color: #666;
-        }
-
         .btn-primary {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 10px;
         }
 
         .btn-primary:hover {
@@ -142,29 +125,30 @@
             color: #3c3;
         }
 
-        .login-footer {
+        .register-footer {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 15px;
         }
 
-        .login-footer p {
+        .register-footer p {
             color: #666;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
         }
 
-        .login-footer a {
+        .register-footer a {
             color: #667eea;
             text-decoration: none;
             font-weight: 600;
         }
 
-        .login-footer a:hover {
+        .register-footer a:hover {
             text-decoration: underline;
         }
 
         .back-home {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .back-home a {
@@ -182,40 +166,44 @@
 
         .error-text {
             color: #c33;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-top: 5px;
         }
 
-        /* Responsif untuk HP dan tablet */
         @media (max-width: 768px) {
-            .login-container {
+            .register-container {
                 flex-direction: column;
                 max-width: 90%;
             }
 
-            .login-body {
-                padding: 40px 25px;
+            .register-body {
+                padding: 30px 20px;
+                max-height: none;
             }
 
-            .login-header {
-                padding: 35px 25px;
+            .register-header {
+                padding: 30px 20px;
             }
 
-            .login-header h1 {
-                font-size: 2rem;
+            .register-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-control {
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
     <div>
-        <div class="login-container">
-            <div class="login-header">
-                <h1>🔐 Login</h1>
-                <p>Masuk ke akun TelcoApp Anda<br>dan nikmati layanan terbaik kami.</p>
+        <div class="register-container">
+            <div class="register-header">
+                <h1>📝 Daftar</h1>
+                <p>Buat akun TelcoApp Anda<br>dan mulai nikmati layanan kami.</p>
             </div>
 
-            <div class="login-body">
+            <div class="register-body">
                 @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -225,7 +213,7 @@
                 @if($errors->any())
                     <div class="alert alert-danger">
                         <strong>Oops!</strong> Ada kesalahan:
-                        <ul style="margin: 10px 0 0 20px;">
+                        <ul style="margin: 10px 0 0 20px; font-size: 0.9rem;">
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
@@ -233,9 +221,25 @@
                     </div>
                 @endif
 
-                <form action="{{ route('login.post') }}" method="POST">
+                <form action="{{ route('register.post') }}" method="POST">
                     @csrf
                     
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="name" 
+                            name="name" 
+                            placeholder="Nama lengkap Anda"
+                            value="{{ old('name') }}"
+                            required
+                        >
+                        @error('name')
+                            <div class="error-text">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input 
@@ -248,6 +252,22 @@
                             required
                         >
                         @error('email')
+                            <div class="error-text">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Nomor Telepon</label>
+                        <input 
+                            type="tel" 
+                            class="form-control" 
+                            id="phone" 
+                            name="phone" 
+                            placeholder="08xxxxxxxxxx"
+                            value="{{ old('phone') }}"
+                            required
+                        >
+                        @error('phone')
                             <div class="error-text">{{ $message }}</div>
                         @enderror
                     </div>
@@ -267,36 +287,29 @@
                         @enderror
                     </div>
 
-                    <div class="form-check">
-                        <input type="checkbox" id="remember" name="remember">
-                        <label for="remember">Ingat saya</label>
+                    <div class="form-group">
+                        <label for="password_confirmation">Konfirmasi Password</label>
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            id="password_confirmation" 
+                            name="password_confirmation" 
+                            placeholder="••••••••"
+                            required
+                        >
+                        @error('password_confirmation')
+                            <div class="error-text">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <button type="submit" class="btn-primary">
-                        Masuk Sekarang
+                        Daftar Sekarang
                     </button>
                 </form>
 
-                <div class="login-footer">
-                    <p>Belum punya akun?</p>
-                    <a href="{{ route('register') }}">Daftar Sekarang</a>
-                </div>
-
-                <!-- Dummy Accounts Info -->
-                <div style="margin-top: 2rem; padding: 1.5rem; background: #f0f4ff; border-left: 4px solid #667eea; border-radius: 8px; font-size: 0.85rem; color: #555;">
-                    <strong style="color: #667eea; display: block; margin-bottom: 0.8rem;">📝 Akun Demo untuk Testing:</strong>
-                    
-                    <p style="margin-bottom: 0.8rem;">
-                        <strong>Admin:</strong><br>
-                        Email: admin@telcoapp.com<br>
-                        Password: password123
-                    </p>
-                    
-                    <p style="margin-bottom: 0;">
-                        <strong>Customer:</strong><br>
-                        Email: user@telcoapp.com<br>
-                        Password: password123
-                    </p>
+                <div class="register-footer">
+                    <p>Sudah punya akun?</p>
+                    <a href="{{ route('login') }}">Masuk Sekarang</a>
                 </div>
             </div>
         </div>

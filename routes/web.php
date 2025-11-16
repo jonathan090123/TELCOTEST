@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PaketDataController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,20 +36,23 @@ Route::middleware('guest')->group(function () {
 // Route untuk Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
+// Route Paket Data (Public - bisa dilihat tanpa login)
+Route::prefix('paket-data')->name('paket-data.')->group(function () {
+    // Halaman list semua paket (public)
+    Route::get('/', [PaketDataController::class, 'index'])->name('index');
+    
+    // Halaman detail paket (public)
+    Route::get('/{id}', [PaketDataController::class, 'show'])->name('show');
+});
+
 // Route yang memerlukan authentication
 Route::middleware('auth')->group(function () {
     
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
-    // Paket Data Routes
+    // Paket Data - Beli & Riwayat (Require Auth)
     Route::prefix('paket-data')->name('paket-data.')->group(function () {
-        // Halaman list semua paket
-        Route::get('/', [PaketDataController::class, 'index'])->name('index');
-        
-        // Halaman detail paket
-        Route::get('/{id}', [PaketDataController::class, 'show'])->name('show');
-        
         // Halaman beli paket
         Route::get('/{id}/beli', [PaketDataController::class, 'beliPaket'])->name('beli');
         Route::post('/{id}/beli', [PaketDataController::class, 'prosesBeliPaket'])->name('beli.proses');
@@ -76,7 +80,5 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('paket-data', PaketDataController::class)->except(['show']);
     
     // Manajemen User
-    Route::get('/users', function () {
-        return view('admin.users.index');
-    })->name('users.index');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });

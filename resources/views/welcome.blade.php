@@ -107,6 +107,8 @@
             cursor: pointer;
             font-weight: 600;
             transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-primary:hover {
@@ -338,17 +340,24 @@
             <div class="logo">TelcoApp</div>
             
             <ul class="nav-menu">
-                <li><a href="#home">Beranda</a></li>
-                <li><a href="#paket">Paket Data</a></li>
-                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="{{ route('home') }}">Beranda</a></li>
+                <li><a href="{{ route('paket-data.index') }}">Paket Data</a></li>
+                <li><a href="{{ route('about') }}">Tentang</a></li>
         
             </ul>
 
             <div class="nav-icons">
-                <button class="icon-btn">🔍</button>
-                <button class="icon-btn">👤</button>
-                <button class="icon-btn">🛒</button>
-                <button class="btn-primary">Login</button>
+                @auth
+                    <a href="{{ route('dashboard') }}" class="icon-btn" title="Dashboard">📊</a>
+                    <a href="{{ route('profile.index') }}" class="icon-btn" title="Profile">👤</a>
+                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="btn-primary" style="padding: 0.6rem 1.5rem;">Logout</button>
+                    </form>
+                @else
+                    <button class="icon-btn">🔍</button>
+                    <a href="{{ route('login') }}" class="btn-primary">Login</a>
+                @endauth
             </div>
 
             <button class="mobile-menu-btn">☰</button>
