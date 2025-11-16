@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $paket->nama }} - TelcoApp</title>
+@extends('layouts.app')
+
+@section('title', $paket->nama)
+
+@section('extra-styles')
     <style>
         * {
             margin: 0;
@@ -233,16 +232,9 @@
             }
         }
     </style>
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="{{ route('home') }}" class="logo">TelcoApp</a>
-        </div>
-    </nav>
+@endsection
 
-    <div class="container">
+@section('content')
         <a href="{{ route('paket-data.index') }}" class="back-link">
             ← Kembali ke Daftar Paket
         </a>
@@ -312,5 +304,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection

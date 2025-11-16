@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - TelcoApp</title>
+@extends('layouts.app')
+
+@section('title', 'Dashboard')
+
+@section('extra-styles')
     <style>
         * {
             margin: 0;
@@ -277,32 +276,9 @@
             }
         }
     </style>
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">TelcoApp</div>
-            
-            <div class="nav-menu">
-                <a href="{{ route('home') }}">Beranda</a>
-                <a href="{{ route('paket-data.index') }}">Paket Data</a>
-                <a href="{{ route('dashboard') }}">Dashboard</a>
-                <a href="{{ route('profile.index') }}">Profile</a>
-            </div>
+@endsection
 
-            <div class="user-info">
-                <span>👤 {{ $user->name }}</span>
-                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                    @csrf
-                    <button type="submit" class="btn-logout">Logout</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Container -->
-    <div class="container">
+@section('content')
         <!-- Welcome Section -->
         <div class="welcome-section">
             <h1>Selamat Datang, {{ $user->name }}! 👋</h1>
@@ -394,5 +370,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection

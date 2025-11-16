@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beli {{ $paket->nama }} - TelcoApp</title>
+@extends('layouts.app')
+
+@section('title', 'Beli ' . $paket->nama)
+
+@section('extra-styles')
     <style>
         * {
             margin: 0;
@@ -203,9 +202,9 @@
             }
         }
     </style>
-</head>
-<body>
-    <div class="container">
+@endsection
+
+@section('content')
         <a href="{{ route('paket-data.show', $paket->id) }}" class="back-link">
             ← Kembali
         </a>
@@ -316,5 +315,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>  
+@endsection

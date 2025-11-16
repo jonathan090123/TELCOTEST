@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - TelcoApp</title>
+@extends('layouts.app')
+
+@section('title', 'Profile')
+
+@section('extra-styles')
     <style>
         * {
             margin: 0;
@@ -208,22 +207,9 @@
             }
         }
     </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="{{ route('home') }}" class="logo">TelcoApp</a>
-            
-            <div class="nav-menu">
-                <a href="{{ route('home') }}">Beranda</a>
-                <a href="{{ route('paket-data.index') }}">Paket Data</a>
-                <a href="{{ route('dashboard') }}">Dashboard</a>
-                <a href="{{ route('profile.index') }}">Profile</a>
-            </div>
-        </div>
-    </nav>
+@endsection
 
-    <div class="container">
+@section('content')
         <div class="page-header">
             <h1>👤 Profile Saya</h1>
             <p>Kelola informasi akun Anda</p>
@@ -376,5 +362,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection
