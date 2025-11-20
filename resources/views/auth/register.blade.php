@@ -314,11 +314,7 @@
             </div>
         </div>
 
-        <div class="back-home">
-            <a href="{{ route('home') }}">
-                ← Kembali ke Beranda
-            </a>
-        </div>
+        
     </div>
 </body>
 </html>

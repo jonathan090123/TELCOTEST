@@ -35,19 +35,23 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            display: inline-flex;
+            align-items: center;
+            gap: 0;
             text-decoration: none;
             cursor: pointer;
             transition: opacity 0.3s;
         }
 
+        .logo img {
+            height: 48px;
+            width: auto;
+            border-radius: 6px;
+            display: block;
+        }
+
         .logo:hover {
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .nav-menu {
@@ -200,7 +204,9 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="{{ route('home') }}" class="logo">TelcoApp</a>
+            <a href="{{ route('home') }}" class="logo">
+                <img src="{{ asset('img/icon.jpg') }}" alt="TelcoApp">
+            </a>
             
             @component('components.navbar-menu')
             @endcomponent

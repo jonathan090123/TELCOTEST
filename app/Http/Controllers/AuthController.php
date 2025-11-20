@@ -31,8 +31,8 @@ class AuthController extends Controller
                 return redirect()->intended(route('admin.dashboard'))->with('success', 'Login berhasil!');
             }
             
-            // Redirect ke customer dashboard
-            return redirect()->intended(route('dashboard'))->with('success', 'Login berhasil!');
+            // Redirect ke homepage (beranda) untuk customer
+            return redirect()->intended(route('home'))->with('success', 'Login berhasil!');
         }
 
         return back()->withErrors([
@@ -66,7 +66,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('dashboard')->with('success', 'Registrasi berhasil!');
+        return redirect()->route('home')->with('success', 'Registrasi berhasil!');
     }
 
     // Proses logout
