@@ -82,7 +82,7 @@ class AuthController extends Controller
     // Tampilkan profile
     public function profile()
     {
-        return view('profile.index', [
+        return view('customer.profile.index', [
             'user' => Auth::user()
         ]);
     }

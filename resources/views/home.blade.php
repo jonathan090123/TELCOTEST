@@ -242,104 +242,76 @@
             <button class="carousel-btn next" onclick="changeSlide(1)">›</button>
             
             <div class="carousel-track" id="carouselTrack">
-                <!-- Slide 1 -->
-                <div class="carousel-slide">
-                    <div class="product-card">
-                        <div class="product-info">
-                            <h2>Paket Freedom Unlimited</h2>
-                            <div class="product-data">Unlimited</div>
-                            <div class="product-price">Rp 150.000 <span>/bulan</span></div>
-                            <ul class="product-features">
-                                <li>Internet tanpa batas</li>
-                                <li>Kecepatan hingga 10 Mbps</li>
-                                <li>Gratis nelpon 100 menit</li>
-                                <li>Bonus streaming musik</li>
-                            </ul>
-                            <button class="btn-carousel">Beli Sekarang</button>
+                @if(isset($paketData) && $paketData->count() > 0)
+                    @foreach($paketData as $paket)
+                        <div class="carousel-slide">
+                            <div class="product-card">
+                                <div class="product-info">
+                                    <h2>{{ $paket->nama }}</h2>
+                                    <div class="product-data">{{ $paket->kuota }}</div>
+                                    <div class="product-price">Rp {{ number_format($paket->harga, 0, ',', '.') }} <span>/{{ $paket->masa_aktif }} hari</span></div>
+                                    <ul class="product-features">
+                                        @if($paket->deskripsi)
+                                            <li>{{ Str::limit($paket->deskripsi, 120) }}</li>
+                                        @else
+                                            <li>Paket data sesuai kebutuhan Anda</li>
+                                        @endif
+                                    </ul>
+                                    @auth
+                                        <a href="{{ route('paket-data.beli', $paket->id) }}" class="btn-carousel">Beli Sekarang</a>
+                                    @else
+                                        <a href="{{ route('paket-data.show', $paket->id) }}" class="btn-carousel">Lihat Detail</a>
+                                    @endauth
+                                </div>
+                                <div class="product-visual">
+                                    <div class="product-icon">📱</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-visual">
-                            <div class="product-icon">⚡</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 2 -->
-                <div class="carousel-slide">
-                    <div class="product-card">
-                        <div class="product-info">
-                            <h2>Paket Super 50GB</h2>
-                            <div class="product-data">50 GB</div>
-                            <div class="product-price">Rp 85.000 <span>/bulan</span></div>
-                            <ul class="product-features">
-                                <li>50GB kuota internet</li>
-                                <li>Bonus streaming 10GB</li>
-                                <li>Gratis SMS unlimited</li>
-                                <li>Masa aktif 30 hari</li>
-                            </ul>
-                            <button class="btn-carousel">Beli Sekarang</button>
-                        </div>
-                        <div class="product-visual">
-                            <div class="product-icon">📶</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 3 -->
-                <div class="carousel-slide">
-                    <div class="product-card">
-                        <div class="product-info">
-                            <h2>Paket Smart 25GB</h2>
-                            <div class="product-data">25 GB</div>
-                            <div class="product-price">Rp 50.000 <span>/bulan</span></div>
-                            <ul class="product-features">
-                                <li>25GB kuota internet</li>
-                                <li>Bonus 5GB kuota malam</li>
-                                <li>Gratis nelpon 50 menit</li>
-                                <li>Cocok untuk pelajar</li>
-                            </ul>
-                            <button class="btn-carousel">Beli Sekarang</button>
-                        </div>
-                        <div class="product-visual">
-                            <div class="product-icon">📱</div>
+                    @endforeach
+                @else
+                    <!-- fallback to static slides if $paketData not provided -->
+                    <div class="carousel-slide">
+                        <div class="product-card">
+                            <div class="product-info">
+                                <h2>Paket Freedom Unlimited</h2>
+                                <div class="product-data">Unlimited</div>
+                                <div class="product-price">Rp 150.000 <span>/bulan</span></div>
+                                <ul class="product-features">
+                                    <li>Internet tanpa batas</li>
+                                    <li>Kecepatan hingga 10 Mbps</li>
+                                    <li>Gratis nelpon 100 menit</li>
+                                    <li>Bonus streaming musik</li>
+                                </ul>
+                                <button class="btn-carousel">Beli Sekarang</button>
+                            </div>
+                            <div class="product-visual">
+                                <div class="product-icon">⚡</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Slide 4 -->
-                <div class="carousel-slide">
-                    <div class="product-card">
-                        <div class="product-info">
-                            <h2>Paket Hemat 10GB</h2>
-                            <div class="product-data">10 GB</div>
-                            <div class="product-price">Rp 30.000 <span>/bulan</span></div>
-                            <ul class="product-features">
-                                <li>10GB kuota internet</li>
-                                <li>Bonus 2GB kuota malam</li>
-                                <li>Masa aktif 30 hari</li>
-                                <li>Harga paling terjangkau</li>
-                            </ul>
-                            <button class="btn-carousel">Beli Sekarang</button>
-                        </div>
-                        <div class="product-visual">
-                            <div class="product-icon">🌐</div>
-                        </div>
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
 
         <!-- Carousel Indicators -->
         <div class="carousel-indicators">
-            <button class="indicator active" onclick="goToSlide(0)"></button>
-            <button class="indicator" onclick="goToSlide(1)"></button>
-            <button class="indicator" onclick="goToSlide(2)"></button>
-            <button class="indicator" onclick="goToSlide(3)"></button>
+            @if(isset($paketData) && $paketData->count() > 0)
+                @for ($i = 0; $i < $paketData->count(); $i++)
+                    <button class="indicator @if($i == 0) active @endif" onclick="goToSlide({{ $i }})"></button>
+                @endfor
+            @else
+                <button class="indicator active" onclick="goToSlide(0)"></button>
+                <button class="indicator" onclick="goToSlide(1)"></button>
+                <button class="indicator" onclick="goToSlide(2)"></button>
+                <button class="indicator" onclick="goToSlide(3)"></button>
+            @endif
         </div>
     </section>
 
     <script>
         let currentSlide = 0;
-        const totalSlides = 4;
+        const totalSlides = {{ isset($paketData) ? $paketData->count() : 4 }};
 
         function changeSlide(direction) {
             currentSlide += direction;

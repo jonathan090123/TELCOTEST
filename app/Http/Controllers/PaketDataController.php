@@ -17,14 +17,14 @@ class PaketDataController extends Controller
             ->orderBy('harga', 'asc')
             ->get();
         
-        return view('paket-data.index', compact('paketData'));
+        return view('customer.paket-data.index', compact('paketData'));
     }
 
     // Tampilkan detail paket
     public function show($id)
     {
         $paket = PaketData::findOrFail($id);
-        return view('paket-data.show', compact('paket'));
+        return view('customer.paket-data.show', compact('paket'));
     }
 
     // Halaman form beli paket
@@ -33,7 +33,7 @@ class PaketDataController extends Controller
         $paket = PaketData::findOrFail($id);
         $user = Auth::user();
         
-        return view('paket-data.beli', compact('paket', 'user'));
+        return view('customer.paket-data.beli', compact('paket', 'user'));
     }
 
     // Proses pembelian paket
@@ -62,9 +62,10 @@ class PaketDataController extends Controller
 
             DB::commit();
 
+            // Redirect user to pembayaran page for this transaksi
             return redirect()
-                ->route('paket-data.riwayat')
-                ->with('success', 'Pembelian berhasil! Silakan lakukan pembayaran.');
+                ->route('paket-data.pembayaran.show', $transaksi->id)
+                ->with('success', 'Transaksi dibuat. Silakan selesaikan pembayaran.');
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -80,7 +81,34 @@ class PaketDataController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
         
-        return view('paket-data.riwayat', compact('transaksi'));
+        return view('customer.paket-data.riwayat', compact('transaksi'));
+    }
+
+    // Tampilkan halaman pembayaran untuk transaksi tertentu
+    public function showPembayaran($transaksiId)
+    {
+        $transaksi = Transaksi::with('paketData')
+            ->where('id', $transaksiId)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        return view('customer.paket-data.pembayaran', compact('transaksi'));
+    }
+
+    // Proses pembayaran (dummy) — tandai transaksi sebagai success
+    public function prosesPembayaran(Request $request, $transaksiId)
+    {
+        $transaksi = Transaksi::where('id', $transaksiId)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        // In real app: integrate payment gateway here. For now we mark success.
+        $transaksi->status = 'success';
+        $transaksi->save();
+
+        return redirect()
+            ->route('paket-data.riwayat')
+            ->with('success', 'Pembayaran berhasil. Paket akan segera diaktifkan.');
     }
 
     // ===== ADMIN FUNCTIONS =====

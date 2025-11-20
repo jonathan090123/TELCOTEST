@@ -68,7 +68,7 @@ class DashboardController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('transaksi.index', compact('transaksis'));
+        return view('customer.transaksi.index', compact('transaksis'));
     }
 
     public function transaksiIndex()

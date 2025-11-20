@@ -13,8 +13,15 @@ use App\Http\Controllers\UserController;
 */
 
 // Route untuk halaman utama
+use App\Models\PaketData;
+
 Route::get('/', function () {
-    return view('welcome');
+    $paketData = PaketData::where('status', 'active')
+        ->orderBy('harga', 'asc')
+        ->take(4)
+        ->get();
+
+    return view('welcome', compact('paketData'));
 })->name('home');
 
 // Route untuk halaman About
@@ -56,6 +63,10 @@ Route::middleware('auth')->group(function () {
         // Halaman beli paket
         Route::get('/{id}/beli', [PaketDataController::class, 'beliPaket'])->name('beli');
         Route::post('/{id}/beli', [PaketDataController::class, 'prosesBeliPaket'])->name('beli.proses');
+        
+        // Halaman pembayaran untuk transaksi yang dibuat
+        Route::get('/transaksi/{transaksi}/bayar', [PaketDataController::class, 'showPembayaran'])->name('pembayaran.show');
+        Route::post('/transaksi/{transaksi}/bayar', [PaketDataController::class, 'prosesPembayaran'])->name('pembayaran.proses');
         
         // Riwayat pembelian
         Route::get('/riwayat/pembelian', [PaketDataController::class, 'riwayat'])->name('riwayat');
