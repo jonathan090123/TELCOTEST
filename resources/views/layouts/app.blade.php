@@ -174,6 +174,25 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
+        /* SPA Navigation */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        .nav-menu a.nav-link {
+            cursor: pointer;
+        }
+
+        .nav-menu a.nav-link.active {
+            color: #667eea !important;
+            background: rgba(102, 126, 234, 0.15) !important;
+            font-weight: 600 !important;
+        }
+
         @yield('extra-styles')
     </style>
 </head>
@@ -184,13 +203,21 @@
             <a href="{{ route('home') }}" class="logo">TelcoApp</a>
             
             <ul class="nav-menu">
-                <li><a href="{{ route('home') }}" @if(Route::currentRouteName() === 'home') class="active" @endif>Beranda</a></li>
-                <li><a href="{{ route('paket-data.index') }}" @if(Route::currentRouteName() === 'paket-data.index') class="active" @endif>Paket Data</a></li>
-                <li><a href="{{ route('about') }}" @if(Route::currentRouteName() === 'about') class="active" @endif>Tentang</a></li>
-                
-                @auth
-                    <li><a href="{{ route('dashboard') }}" @if(Route::currentRouteName() === 'dashboard') class="active" @endif>Dashboard</a></li>
-                @endauth
+                @if(Route::currentRouteName() === 'home')
+                    <!-- SPA Mode: Show section links -->
+                    <li><a href="#home" class="nav-link active">Beranda</a></li>
+                    <li><a href="#paket-data" class="nav-link">Paket Data</a></li>
+                    <li><a href="#tentang" class="nav-link">Tentang</a></li>
+                @else
+                    <!-- Normal Mode: Show route links -->
+                    <li><a href="{{ route('home') }}">Beranda</a></li>
+                    <li><a href="{{ route('paket-data.index') }}">Paket Data</a></li>
+                    <li><a href="{{ route('about') }}">Tentang</a></li>
+                    
+                    @auth
+                        <li><a href="{{ route('dashboard') }}" @if(Route::currentRouteName() === 'dashboard') class="active" @endif>Dashboard</a></li>
+                    @endauth
+                @endif
             </ul>
 
             <div class="nav-icons">
@@ -212,11 +239,54 @@
     @yield('content')
 
     <script>
-        // Mobile menu toggle (optional)
+        // Mobile menu toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             const navMenu = document.querySelector('.nav-menu');
             navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
         });
+
+        // SPA Navigation - Smooth scroll for anchor links
+        @if(Route::currentRouteName() === 'home')
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                        updateActiveNavLink();
+                    }
+                });
+            });
+
+            // Update active link based on scroll position
+            window.addEventListener('scroll', updateActiveNavLink);
+
+            function updateActiveNavLink() {
+                let current = 'home';
+                const sections = document.querySelectorAll('section[id]');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Set initial active link
+            updateActiveNavLink();
+        @endif
     </script>
 </body>
 </html>
