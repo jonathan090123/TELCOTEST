@@ -202,23 +202,8 @@
         <div class="nav-container">
             <a href="{{ route('home') }}" class="logo">TelcoApp</a>
             
-            <ul class="nav-menu">
-                @if(Route::currentRouteName() === 'home')
-                    <!-- SPA Mode: Show section links -->
-                    <li><a href="#home" class="nav-link active">Beranda</a></li>
-                    <li><a href="#paket-data" class="nav-link">Paket Data</a></li>
-                    <li><a href="#tentang" class="nav-link">Tentang</a></li>
-                @else
-                    <!-- Normal Mode: Show route links -->
-                    <li><a href="{{ route('home') }}">Beranda</a></li>
-                    <li><a href="{{ route('paket-data.index') }}">Paket Data</a></li>
-                    <li><a href="{{ route('about') }}">Tentang</a></li>
-                    
-                    @auth
-                        <li><a href="{{ route('dashboard') }}" @if(Route::currentRouteName() === 'dashboard') class="active" @endif>Dashboard</a></li>
-                    @endauth
-                @endif
-            </ul>
+            @component('components.navbar-menu')
+            @endcomponent
 
             <div class="nav-icons">
                 @auth

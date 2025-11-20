@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Manajemen User')
+@section('title', 'Manajemen Transaksi')
 
 @section('extra-styles')
     <style>
-        .users-container {
-            max-width: 1200px;
+        .transaksi-container {
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        .users-header {
+        .transaksi-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 2.5rem;
@@ -22,13 +22,13 @@
             align-items: center;
         }
 
-        .users-header h1 {
+        .transaksi-header h1 {
             font-size: 2rem;
             font-weight: 700;
             margin: 0;
         }
 
-        .users-header p {
+        .transaksi-header p {
             opacity: 0.9;
             margin-top: 0.5rem;
         }
@@ -48,7 +48,7 @@
             margin-top: 0.3rem;
         }
 
-        .users-content {
+        .transaksi-content {
             background: white;
             border-radius: 12px;
             padding: 2rem;
@@ -94,36 +94,27 @@
             color: #333;
         }
 
-        table tbody td.no {
-            color: #999;
-            font-weight: 600;
-            width: 50px;
-        }
-
-        table tbody td.aksi {
-            text-align: center;
-        }
-
-        .btn-delete {
-            background: #ff6b6b;
-            color: white;
-            padding: 0.6rem 1rem;
-            border: none;
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
             border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
             font-size: 0.85rem;
-            transition: all 0.3s ease;
+            font-weight: 600;
         }
 
-        .btn-delete:hover {
-            background: #ff5252;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
         }
 
-        .form-delete {
-            display: inline;
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-failed {
+            background: #f8d7da;
+            color: #721c24;
         }
 
         .empty-state {
@@ -134,11 +125,10 @@
 
         .empty-state p {
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
         }
 
         @media (max-width: 768px) {
-            .users-header {
+            .transaksi-header {
                 flex-direction: column;
                 gap: 1.5rem;
                 text-align: center;
@@ -148,7 +138,7 @@
                 text-align: center;
             }
 
-            .users-container {
+            .transaksi-container {
                 padding: 1rem;
             }
 
@@ -160,59 +150,72 @@
             table tbody td {
                 padding: 0.8rem;
             }
-
-            .btn-delete {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.75rem;
-            }
         }
     </style>
 @endsection
 
 @section('content')
-<div class="users-container">
-    <div class="users-header">
+<div class="transaksi-container">
+    <div class="transaksi-header">
         <div>
-            <h1>👥 Manajemen User</h1>
-            <p>Kelola data pengguna pelanggan sistem</p>
+            <h1>💳 Manajemen Transaksi</h1>
+            <p>Lihat dan kelola semua transaksi pengguna</p>
         </div>
         <div class="stat-info">
-            @php $customers = $users->where('role', 'customer'); @endphp
-            <div class="number">{{ $customers->count() }}</div>
-            <div class="label">Total Customer</div>
+            <div class="number">{{ $transaksis->count() }}</div>
+            <div class="label">Total Transaksi</div>
         </div>
     </div>
 
-    <div class="users-content">
-        @if($customers->count() > 0)
+    <div class="transaksi-content">
+        @if($transaksis->count() > 0)
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>Telepon</th>
-                            <th>Bergabung</th>
-                            <th>Aksi</th>
+                            <th>Kode Transaksi</th>
+                            <th>User</th>
+                            <th>Paket Data</th>
+                            <th>Harga</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($customers as $user)
+                        @foreach($transaksis as $transaksi)
                         <tr>
-                            <td class="no">{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->phone ?? '-' }}</td>
-                            <td>{{ $user->created_at->format('d M Y') }}</td>
-                            <td class="aksi">
-                                <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" class="form-delete" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" class="btn-delete" onclick="confirm('Apakah Anda yakin ingin menghapus user ini?') && this.closest('form').submit();">
-                                        🗑️ Hapus
-                                    </button>
-                                </form>
+                            <td>
+                                <strong>{{ $transaksi->kode_transaksi ?? '-' }}</strong>
+                            </td>
+                            <td>
+                                @if($transaksi->user)
+                                    {{ $transaksi->user->name }}<br>
+                                    <small style="color: #999;">{{ $transaksi->user->email }}</small>
+                                @else
+                                    User dihapus
+                                @endif
+                            </td>
+                            <td>
+                                @if($transaksi->paketData)
+                                    {{ $transaksi->paketData->nama }}
+                                @else
+                                    Paket dihapus
+                                @endif
+                            </td>
+                            <td>
+                                Rp {{ number_format($transaksi->harga ?? 0, 0, ',', '.') }}
+                            </td>
+                            <td>
+                                @php
+                                    $status = $transaksi->status ?? 'pending';
+                                    $badgeClass = 'status-' . $status;
+                                @endphp
+                                <span class="status-badge {{ $badgeClass }}">
+                                    {{ ucfirst($status) }}
+                                </span>
+                            </td>
+                            <td>
+                                {{ $transaksi->created_at->format('d M Y H:i') }}
                             </td>
                         </tr>
                         @endforeach
@@ -221,7 +224,7 @@
             </div>
         @else
             <div class="empty-state">
-                <p>📭 Tidak ada data customer</p>
+                <p>📭 Tidak ada data transaksi</p>
             </div>
         @endif
     </div>

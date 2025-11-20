@@ -1,198 +1,249 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - TelcoApp</title>
+@extends('layouts.app')
+
+@section('title', 'Admin Dashboard')
+
+@section('extra-styles')
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f6fa;
-        }
-
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1400px;
+        .admin-container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .admin-header-left h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
         }
 
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
+        .admin-header-left p {
+            opacity: 0.95;
+            font-size: 1rem;
         }
 
-        .nav-menu a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
+        .greeting-text {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.2px;
         }
 
-        .nav-menu a:hover {
-            color: #667eea;
+        .user-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
         }
 
-        .nav-icons {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
+        .greeting-time {
+            text-align: right;
+            font-size: 0.95rem;
+            opacity: 0.9;
         }
 
-        .btn-logout {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.6rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
+        .greeting-time .time {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
         }
 
-        .btn-logout:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .admin-title {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .admin-grid {
+        .admin-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
-        .admin-card {
+        .stat-card {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
             padding: 2rem;
-            text-align: center;
-            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
         }
 
-        .admin-card:hover {
+        .stat-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
         }
 
-        .admin-card h3 {
+        .stat-card h3 {
             color: #667eea;
-            font-size: 1.3rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
             margin-bottom: 1rem;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
-        .admin-card p {
-            color: #666;
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .description {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        .admin-actions {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+        }
+
+        .admin-actions h2 {
+            color: #333;
             margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 600;
         }
 
-        .admin-card a {
-            display: inline-block;
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .action-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 0.8rem 1.5rem;
+            padding: 1.5rem;
+            border: none;
             border-radius: 10px;
-            text-decoration: none;
+            cursor: pointer;
             font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 1rem;
         }
 
-        .admin-card a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        .action-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .action-btn.secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .action-btn.secondary:hover {
+            background: #e0e0e0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         @media (max-width: 768px) {
-            .admin-title {
+            .admin-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .admin-header-left h1 {
                 font-size: 1.8rem;
             }
 
-            .container {
+            .greeting-time {
+                text-align: center;
+            }
+
+            .admin-container {
                 padding: 1rem;
             }
         }
     </style>
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">TelcoApp Admin</div>
-            <ul class="nav-menu">
-                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ route('admin.paket-data.index') }}">Paket Data</a></li>
-                <li><a href="{{ route('admin.users.index') }}">Manajemen User</a></li>
-            </ul>
-            <div class="nav-icons">
-                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                    @csrf
-                    <button type="submit" class="btn-logout">Logout</button>
-                </form>
-            </div>
+@endsection
+
+@section('content')
+<div class="admin-container">
+    <div class="admin-header">
+        <div class="admin-header-left">
+            <div class="greeting-text" id="greeting-message">Selamat Pagi</div>
+            <h1 class="user-name">👤 {{ Auth::user()->name }}</h1>
+            <p>Kelola sistem dan transaksi pengguna</p>
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="container">
-        <h1 class="admin-title">🔐 Admin Dashboard</h1>
-
-        <div class="admin-grid">
-            <div class="admin-card">
-                <h3>📦 Kelola Paket Data</h3>
-                <p>Tambah, ubah, atau hapus paket data yang tersedia</p>
-                <a href="{{ route('admin.paket-data.index') }}">Kelola Paket</a>
-            </div>
-
-            <div class="admin-card">
-                <h3>👥 Manajemen User</h3>
-                <p>Lihat dan kelola daftar user yang terdaftar</p>
-                <a href="{{ route('admin.users.index') }}">Kelola User</a>
-            </div>
-
-            <div class="admin-card">
-                <h3>📊 Laporan</h3>
-                <p>Lihat laporan transaksi dan statistik sistem</p>
-                <a href="#">Lihat Laporan</a>
-            </div>
+        <div class="greeting-time">
+            <div>Waktu Sekarang</div>
+            <div class="time" id="current-time">--:--</div>
         </div>
     </div>
-</body>
-</html>
+
+    <!-- Statistics Cards -->
+    <div class="admin-stats">
+        <div class="stat-card">
+            <h3>👥 Total Users</h3>
+            <div class="number">{{ App\Models\User::count() }}</div>
+            <div class="description">Pengguna terdaftar di sistem</div>
+        </div>
+
+        <div class="stat-card">
+            <h3>💳 Total Transaksi</h3>
+            <div class="number">{{ App\Models\Transaksi::count() }}</div>
+            <div class="description">Transaksi yang telah dilakukan</div>
+        </div>
+
+        <div class="stat-card">
+            <h3>🔑 Admin Users</h3>
+            <div class="number">{{ App\Models\User::where('role', 'admin')->count() }}</div>
+            <div class="description">Pengguna dengan role admin</div>
+        </div>
+    </div>
+
+    <!-- Admin Actions -->
+    <div class="admin-actions">
+        <h2>⚙️ Manajemen Sistem</h2>
+        <div class="action-grid">
+            <a href="{{ route('admin.users.index') }}" class="action-btn">
+                👥 Manajemen User
+            </a>
+            <a href="{{ route('admin.transaksi.index') }}" class="action-btn">
+                💳 Manajemen Transaksi
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        document.getElementById('current-time').textContent = hours + ':' + minutes;
+
+        // dynamic greeting
+        const hour = now.getHours();
+        let greeting = 'Selamat Pagi 👋';
+        if (hour >= 12 && hour < 15) {
+            greeting = 'Selamat Siang 👋';
+        } else if (hour >= 15 && hour < 18) {
+            greeting = 'Selamat Sore';
+        } else if (hour >= 18 || hour < 5) {
+            greeting = 'Selamat Malam 👋';
+        }
+        const el = document.getElementById('greeting-message');
+        if (el) el.textContent = greeting;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+</script>
+@endsection

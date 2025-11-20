@@ -61,6 +61,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/riwayat/pembelian', [PaketDataController::class, 'riwayat'])->name('riwayat');
     });
     
+    // Transaksi Customer
+    Route::prefix('transaksi')->name('transaksi.')->group(function () {
+        Route::get('/', [DashboardController::class, 'transaksiCustomer'])->name('index');
+    });
+    
     // Profile Routes
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [AuthController::class, 'profile'])->name('index');
@@ -72,13 +77,12 @@ Route::middleware('auth')->group(function () {
 // Route untuk admin (jika diperlukan)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-    
-    // CRUD Paket Data untuk Admin
-    Route::resource('paket-data', PaketDataController::class)->except(['show']);
+    Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])->name('dashboard');
     
     // Manajemen User
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    
+    // Manajemen Transaksi Admin
+    Route::get('/transaksi', [DashboardController::class, 'transaksiIndex'])->name('transaksi.index');
 });

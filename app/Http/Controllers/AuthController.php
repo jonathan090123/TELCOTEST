@@ -25,7 +25,14 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard')->with('success', 'Login berhasil!');
+            
+            // Redirect ke admin dashboard jika admin
+            if (Auth::user()->role === 'admin') {
+                return redirect()->intended(route('admin.dashboard'))->with('success', 'Login berhasil!');
+            }
+            
+            // Redirect ke customer dashboard
+            return redirect()->intended(route('dashboard'))->with('success', 'Login berhasil!');
         }
 
         return back()->withErrors([
@@ -54,6 +61,7 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'phone' => $validated['phone'],
             'password' => Hash::make($validated['password']),
+            'role' => 'customer', // Default role customer
         ]);
 
         Auth::login($user);

@@ -4,370 +4,272 @@
 
 @section('extra-styles')
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f6fa;
-        }
-
-        /* Navbar */
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1400px;
+        .dashboard-container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 2rem;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-menu a:hover {
-            color: #667eea;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .btn-logout {
-            background: #dc3545;
-            color: white;
-            padding: 0.5rem 1.2rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Welcome Section */
-        .welcome-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-        }
-
-        .welcome-section h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
-
-        .stat-icon.blue {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .stat-icon.green {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        }
-
-        .stat-icon.orange {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .stat-info h3 {
-            color: #333;
-            font-size: 2rem;
+        .dashboard-header-left h1 {
+            font-size: 2.2rem;
             margin-bottom: 0.3rem;
+            font-weight: 700;
         }
 
-        .stat-info p {
-            color: #666;
-            font-size: 0.9rem;
+        .dashboard-header-left p {
+            opacity: 0.95;
+            font-size: 1.05rem;
         }
 
-        /* Content Grid */
-        .content-grid {
+        .greeting-time {
+            text-align: right;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .greeting-time .time {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        .dashboard-content {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
         .card {
             background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
         }
 
         .card h2 {
-            color: #333;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        /* Transaction Table */
-        .transaction-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .transaction-table th {
-            background: #f8f9fa;
-            padding: 1rem;
-            text-align: left;
-            color: #666;
-            font-weight: 600;
-            border-bottom: 2px solid #e9ecef;
-        }
-
-        .transaction-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #e9ecef;
-            color: #333;
-        }
-
-        .badge {
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .badge-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .badge-success {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .badge-failed {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        /* Paket Cards */
-        .paket-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .paket-item {
-            padding: 1.5rem;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            transition: all 0.3s;
-        }
-
-        .paket-item:hover {
-            border-color: #667eea;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
-        }
-
-        .paket-item h4 {
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .paket-item .price {
             color: #667eea;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .card-number {
+            font-size: 2.5rem;
             font-weight: bold;
+            color: #667eea;
             margin-bottom: 0.5rem;
         }
 
-        .paket-item p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .btn-beli {
-            width: 100%;
-            padding: 0.8rem;
+        .btn {
+            display: inline-block;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border: none;
+            padding: 0.85rem 1.8rem;
             border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 1rem;
             text-decoration: none;
-            display: block;
-            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 2rem;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-text {
+            background: #f8f9fa;
+            padding: 1.2rem;
+            border-left: 4px solid #667eea;
+            margin-bottom: 1rem;
+            border-radius: 5px;
             color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
-        @media (max-width: 968px) {
-            .content-grid {
-                grid-template-columns: 1fr;
+        .info-text strong {
+            color: #333;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .btn-group .btn {
+            text-align: center;
+            width: 100%;
+        }
+
+        .stat-label {
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
             }
 
-            .transaction-table {
-                font-size: 0.9rem;
+            .dashboard-header-left h1 {
+                font-size: 1.8rem;
+            }
+
+            .greeting-time {
+                text-align: center;
+            }
+
+            .dashboard-container {
+                padding: 1rem;
             }
         }
     </style>
 @endsection
 
 @section('content')
-        <!-- Welcome Section -->
-        <div class="welcome-section">
-            <h1>Selamat Datang, {{ $user->name }}! 👋</h1>
-            <p>Kelola paket data dan transaksi Anda dengan mudah</p>
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <div class="dashboard-header-left">
+            <h1>👋 Halo, {{ Auth::user()->name }}!</h1>
+            <p>Kelola akun dan transaksi Anda dengan mudah</p>
+        </div>
+        <div class="greeting-time">
+            <div>Selamat Pagi</div>
+            <div class="time" id="current-time">--:--</div>
+        </div>
+    </div>
+
+    <div class="dashboard-content">
+        <!-- Profile Card -->
+        <div class="card">
+            <h2>👤 Profil Saya</h2>
+            <div class="info-text">
+                <strong>{{ Auth::user()->name }}</strong>
+                {{ Auth::user()->email }}<br>
+                📱 {{ Auth::user()->phone ?? 'Belum diisi' }}
+            </div>
+            <a href="{{ route('profile.index') }}" class="btn">Edit Profil</a>
         </div>
 
-        <!-- Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon blue">📊</div>
-                <div class="stat-info">
-                    <h3>{{ $totalTransaksi }}</h3>
-                    <p>Total Transaksi</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon orange">⏳</div>
-                <div class="stat-info">
-                    <h3>{{ $transaksiPending }}</h3>
-                    <p>Menunggu Pembayaran</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon green">✅</div>
-                <div class="stat-info">
-                    <h3>{{ $transaksiBerhasil }}</h3>
-                    <p>Transaksi Berhasil</p>
-                </div>
+        <!-- Paket Data Card -->
+        <div class="card">
+            <h2>📦 Paket Data</h2>
+            <p>Temukan dan beli paket data yang sesuai kebutuhan Anda</p>
+            <div class="card-number">{{ App\Models\PaketData::count() }}</div>
+            <div class="stat-label">Paket tersedia</div>
+            <div style="margin-top: 1.5rem;">
+                <a href="{{ route('paket-data.index') }}" class="btn">Lihat Paket</a>
             </div>
         </div>
 
-        <!-- Content Grid -->
-        <div class="content-grid">
-            <!-- Recent Transactions -->
-            <div class="card">
-                <h2>Transaksi Terakhir</h2>
-                @if($transaksiTerakhir->count() > 0)
-                    <table class="transaction-table">
-                        <thead>
-                            <tr>
-                                <th>Kode</th>
-                                <th>Paket</th>
-                                <th>Harga</th>
-                                <th>Status</th>
-                                <th>Tanggal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($transaksiTerakhir as $transaksi)
-                                <tr>
-                                    <td>{{ $transaksi->kode_transaksi }}</td>
-                                    <td>{{ $transaksi->paketData->nama }}</td>
-                                    <td>Rp {{ number_format($transaksi->harga, 0, ',', '.') }}</td>
-                                    <td>
-                                        <span class="badge badge-{{ $transaksi->status }}">
-                                            {{ ucfirst($transaksi->status) }}
-                                        </span>
-                                    </td>
-                                    <td>{{ $transaksi->created_at->format('d M Y') }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <a href="{{ route('paket-data.riwayat') }}" style="display: inline-block; margin-top: 1rem; color: #667eea; font-weight: 600;">
-                        Lihat Semua Transaksi →
-                    </a>
-                @else
-                    <div class="empty-state">
-                        <p>Belum ada transaksi</p>
-                    </div>
-                @endif
+        <!-- Transaksi Card -->
+        <div class="card">
+            <h2>💳 Riwayat Transaksi</h2>
+            <p>Lihat semua pembelian paket data Anda</p>
+            <div class="card-number">{{ App\Models\Transaksi::where('user_id', Auth::id())->count() }}</div>
+            <div class="stat-label">Transaksi Anda</div>
+            <div style="margin-top: 1.5rem;">
+                <a href="{{ route('transaksi.index') }}" class="btn">Lihat Riwayat</a>
             </div>
+        </div>
 
-            <!-- Popular Packages -->
-            <div class="card">
-                <h2>Paket Populer</h2>
-                <div class="paket-list">
-                    @foreach($paketPopuler as $paket)
-                        <div class="paket-item">
-                            <h4>{{ $paket->nama }}</h4>
-                            <div class="price">Rp {{ number_format($paket->harga, 0, ',', '.') }}</div>
-                            <p>{{ $paket->kuota }} • {{ $paket->masa_aktif }} hari</p>
-                            <a href="{{ route('paket-data.beli', $paket->id) }}" class="btn-beli">
-                                Beli Sekarang
-                            </a>
-                        </div>
-                    @endforeach
+        <!-- Quick Actions Card -->
+        <div class="card">
+            <h2>⚡ Aksi Cepat</h2>
+            <p>Akses fitur-fitur penting dengan satu klik</p>
+            <div class="btn-group" style="margin-top: 1.5rem;">
+                <a href="{{ route('paket-data.index') }}" class="btn">💰 Beli Paket Data</a>
+                <a href="{{ route('transaksi.index') }}" class="btn btn-secondary">📊 Lihat Transaksi</a>
+                <a href="{{ route('profile.index') }}" class="btn btn-secondary">⚙️ Pengaturan Akun</a>
+            </div>
+        </div>
+
+        <!-- Support Card -->
+        <div class="card">
+            <h2>❓ Butuh Bantuan?</h2>
+            <div class="info-text">
+                <strong>Hubungi Tim Support Kami</strong>
+                📧 Email: support@telcoapp.com<br>
+                📱 WhatsApp: +62 812-3456-7890<br>
+                Kami siap membantu 24/7
+            </div>
+        </div>
+
+        <!-- Statistics Card -->
+        <div class="card">
+            <h2>📊 Statistik</h2>
+            <div style="display: flex; justify-content: space-between; text-align: center;">
+                <div>
+                    <div class="card-number">{{ App\Models\Transaksi::where('user_id', Auth::id())->count() }}</div>
+                    <div class="stat-label">Total Pembelian</div>
+                </div>
+                <div style="border-left: 1px solid #eee; flex: 1;">
+                    <div class="card-number">-</div>
+                    <div class="stat-label">Total Pengeluaran</div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<script>
+    function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        document.getElementById('current-time').textContent = hours + ':' + minutes;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+</script>
 @endsection
