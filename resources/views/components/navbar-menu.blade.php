@@ -18,7 +18,7 @@
         <!-- Normal Mode: Show route links -->
         <ul class="nav-menu">
             <li><a href="{{ route('home') }}">Beranda</a></li>
-            <li><a href="{{ route('paket-data.index') }}">Paket Data</a></li>
+            <li><a href="{{ route('home') }}#paket-data">Paket Data</a></li>
             <li><a href="{{ route('about') }}">Tentang</a></li>
         </ul>
     @endif
@@ -35,7 +35,7 @@
         <!-- Normal Mode: Show route links -->
         <ul class="nav-menu">
             <li><a href="{{ route('home') }}">Beranda</a></li>
-            <li><a href="{{ route('paket-data.index') }}">Paket Data</a></li>
+            <li><a href="{{ route('home') }}#paket-data">Paket Data</a></li>
             <li><a href="{{ route('about') }}">Tentang</a></li>
         </ul>
     @endif

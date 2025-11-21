@@ -291,7 +291,7 @@
                     <div class="icon">📭</div>
                     <h3>Belum Ada Transaksi</h3>
                     <p>Anda belum melakukan pembelian paket data</p>
-                    <a href="{{ route('paket-data.index') }}">Lihat Paket Data</a>
+                    <a href="{{ route('home') }}#paket-data">Lihat Paket Data</a>
                 </div>
             @endif
         </div>

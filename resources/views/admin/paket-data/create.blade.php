@@ -1,249 +1,325 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Paket Data - Admin TelcoApp</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+@extends('layouts.app')
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f6fa;
-        }
+@section('title', 'Buat Paket Baru')
 
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+@section('extra-styles')
+<style>
+    body { background:#f8fafc; }
 
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .container {
+        max-width: 1050px;
+        margin: 2.8rem auto;
+        padding: 0 1rem;
+        font-family: Inter, system-ui, sans-serif;
+    }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .form-card {
+        background: #ffffff;
+        border-radius: 18px;
+        border:1px solid #e5e7eb;
+        padding: 2.2rem;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+        transition: .25s;
+    }
 
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
+    .form-card:hover {
+        box-shadow: 0 18px 40px rgba(0,0,0,0.09);
+    }
 
-        .nav-menu a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+    .header-title {
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:1.4rem;
+        border-bottom:1px solid #e5e7eb;
+        padding-bottom:1rem;
+    }
 
-        .nav-menu a:hover {
-            color: #667eea;
-        }
+    .header-title h3 {
+        font-size: 1.35rem;
+        margin:0;
+        font-weight:700;
+        color:#111827;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-        }
+    .header-title small {
+        color:#6b7280;
+        font-size:0.88rem;
+        background:#f1f5f9;
+        padding:4px 10px;
+        border-radius:6px;
+    }
 
-        .page-title {
-            font-size: 2rem;
-            color: #333;
-            margin-bottom: 2rem;
-        }
+    /* Form */
+    .field { margin-bottom:1.2rem; }
 
-        .form-container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-        }
+    .form-label {
+        font-weight:600;
+        margin-bottom:0.35rem;
+        color:#1f2937;
+        font-size:0.93rem;
+        display:block;
+    }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+    .form-control {
+        width:100%;
+        padding:0.8rem 1rem;
+        border:1px solid #d1d5db;
+        border-radius:12px;
+        background:white;
+        transition: .2s;
+        font-size:0.95rem;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 600;
-        }
+    .form-control:focus {
+        border-color:#4f46e5;
+        box-shadow:0 0 0 3px rgba(79,70,229,0.15);
+        outline:none;
+    }
 
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
+    .muted { font-size:0.88rem; color:#6b7280; }
 
-        .form-control:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
+    /* Row */
+    .row { display:flex; gap:1.2rem; }
+    .col { flex:1; }
+    @media(max-width:720px) { .row { flex-direction: column; } }
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
+    /* Image Upload */
+    .upload-box {
+        border:2px dashed #cbd5e1;
+        border-radius:16px;
+        height:190px;
+        background:#f9fafb;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        transition:.2s;
+    }
 
-        .btn-submit {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-            width: 100%;
-        }
+    .upload-box:hover {
+        border-color:#6366f1;
+        background:#eef2ff;
+    }
 
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
+    .upload-box img {
+        max-height:150px;
+        border-radius:10px;
+        object-fit:contain;
+    }
 
-        .back-link {
-            display: inline-block;
-            margin-bottom: 2rem;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
+    .file-row {
+        display:flex;
+        gap:0.7rem;
+        margin-top:0.8rem;
+        align-items:center;
+    }
 
-        .back-link:hover {
-            text-decoration: underline;
-        }
+    .file-btn {
+        background:#4f46e5;
+        color:#fff;
+        font-weight:600;
+        padding:0.55rem 1rem;
+        border:none;
+        cursor:pointer;
+        border-radius:10px;
+        transition:.2s;
+    }
 
-        .error-text {
-            color: #c33;
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
-        }
+    .file-btn:hover { background:#4338ca; }
 
-        .alert {
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
+    .file-name {
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        overflow:hidden;
+        max-width:180px;
+        font-size:0.9rem;
+        color:#475569;
+    }
 
-        .alert-danger {
-            background: #fee;
-            border: 1px solid #fcc;
-            color: #c33;
-        }
-    </style>
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">TelcoApp Admin</div>
-            <ul class="nav-menu">
-                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ route('admin.paket-data.index') }}">Paket Data</a></li>
-                <li><a href="{{ route('admin.users.index') }}">Manajemen User</a></li>
-            </ul>
+    /* Toggle Switch */
+    .switch-wrapper { display:flex; align-items:center; gap:.5rem; margin-top:.5rem; }
+
+    .toggle-text { font-weight:600; font-size:.95rem; color:#1f2937; }
+
+    .switch {
+        width:46px; height:26px;
+        background:#d1d5db;
+        border-radius:999px;
+        position:relative;
+        cursor:pointer;
+        transition:.2s;
+    }
+
+    .switch::after {
+        content:''; width:20px; height:20px;
+        background:white; border-radius:50%;
+        position:absolute; top:3px; left:3px;
+        transition:.2s;
+        box-shadow:0 3px 6px rgba(0,0,0,0.15);
+    }
+
+    .switch.on { background:#4f46e5; }
+    .switch.on::after { left:23px; }
+
+    .switch-input { display:none; }
+
+    /* Buttons */
+    .form-actions {
+        display:flex;
+        justify-content:flex-end;
+        gap:0.7rem;
+        margin-top:2rem;
+    }
+
+    .btn {
+        padding:0.75rem 1.4rem;
+        border-radius:14px;
+        font-weight:700;
+        cursor:pointer;
+        transition:.2s;
+        font-size:.95rem;
+        border:none;
+    }
+
+    .btn-primary {
+        background:#4f46e5;
+        color:#fff;
+        box-shadow:0 10px 25px rgba(79,70,229,0.25);
+    }
+
+    .btn-primary:hover { background:#4338ca; }
+
+    .btn-secondary {
+        background:#f1f5f9;
+        border:1px solid #d1d5db;
+        color:#111;
+    }
+
+    .btn-secondary:hover {
+        background:#e2e8f0;
+    }
+</style>
+@endsection
+
+
+@section('content')
+<div class="container">
+    <div class="form-card">
+
+        <div class="header-title">
+            <div>
+                <h3>Buat Paket Baru</h3>
+                <small>Tambah paket ke katalog secara lengkap dan rapi</small>
+            </div>
+            <small>Admin</small>
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="container">
-        <a href="{{ route('admin.paket-data.index') }}" class="back-link">← Kembali ke Daftar Paket</a>
-        
-        <h1 class="page-title">📝 Tambah Paket Data Baru</h1>
 
         @if($errors->any())
-            <div class="alert alert-danger">
-                <strong>Ada kesalahan:</strong>
-                <ul style="margin-left: 20px;">
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
+            <div class="alert alert-danger" style="border-radius:10px;">
+                <ul>
+                    @foreach($errors->all() as $err)
+                        <li>{{ $err }}</li>
                     @endforeach
                 </ul>
             </div>
         @endif
 
-        <div class="form-container">
-            <form action="{{ route('admin.paket-data.store') }}" method="POST">
-                @csrf
+        <form action="{{ route('admin.paket-data.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
 
-                <div class="form-group">
-                    <label for="nama">Nama Paket</label>
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Contoh: Paket Reguler 3GB" value="{{ old('nama') }}" required>
-                    @error('nama')
-                        <div class="error-text">{{ $message }}</div>
-                    @enderror
+            <div class="row">
+                <div class="col">
+
+                    <div class="field">
+                        <label class="form-label">Nama Paket</label>
+                        <input type="text" name="nama" class="form-control" value="{{ old('nama') }}" placeholder="Contoh: Paket Internet 3GB" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Kuota</label>
+                            <input type="text" name="kuota" value="{{ old('kuota') }}" class="form-control" placeholder="Contoh: 3GB" required>
+                        </div>
+                        <div style="width:180px">
+                            <label class="form-label">Masa Aktif (Hari)</label>
+                            <input type="number" name="masa_aktif" value="{{ old('masa_aktif') }}" class="form-control" placeholder="30" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="form-label">Harga (Rp)</label>
+                        <input type="number" name="harga" value="{{ old('harga') }}" class="form-control" placeholder="100000" required>
+                        <div class="muted">Masukkan angka tanpa titik/koma.</div>
+                    </div>
+
+                    <div class="field">
+                        <label class="form-label">Deskripsi</label>
+                        <textarea name="deskripsi" class="form-control" placeholder="Opsional, isi deskripsi paket">{{ old('deskripsi') }}</textarea>
+                    </div>
+
+                
+
                 </div>
 
-                <div class="form-group">
-                    <label for="kuota">Kuota</label>
-                    <input type="text" class="form-control" id="kuota" name="kuota" placeholder="Contoh: 3GB" value="{{ old('kuota') }}" required>
-                    @error('kuota')
-                        <div class="error-text">{{ $message }}</div>
-                    @enderror
-                </div>
+                <div style="width:310px;">
+                    <label class="form-label">Gambar Paket (Opsional)</label>
+                    <div class="upload-box" id="imageBox"><span class="muted">Belum ada gambar</span></div>
 
-                <div class="form-group">
-                    <label for="masa_aktif">Masa Aktif (Hari)</label>
-                    <input type="number" class="form-control" id="masa_aktif" name="masa_aktif" placeholder="Contoh: 30" value="{{ old('masa_aktif') }}" required>
-                    @error('masa_aktif')
-                        <div class="error-text">{{ $message }}</div>
-                    @enderror
-                </div>
+                    <div class="file-row">
+                        <label id="fileBtn" for="imageInput" class="file-btn" role="button">Pilih Gambar</label>
+                        <span id="fileName" class="file-name"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label for="harga">Harga (Rp)</label>
-                    <input type="number" class="form-control" id="harga" name="harga" placeholder="Contoh: 100000" value="{{ old('harga') }}" required>
-                    @error('harga')
-                        <div class="error-text">{{ $message }}</div>
-                    @enderror
-                </div>
+                    <input type="file" name="image" id="imageInput" accept="image/*" style="position:absolute;left:-9999px;" aria-hidden="true">
 
-                <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi paket (opsional)">{{ old('deskripsi') }}</textarea>
-                    @error('deskripsi')
-                        <div class="error-text">{{ $message }}</div>
-                    @enderror
+                    <div class="muted" style="margin-top:0.5rem;">Disarankan 800×600 — Maks 2MB.</div>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <select class="form-control" id="status" name="status" required>
-                        <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Aktif</option>
-                        <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Nonaktif</option>
-                    </select>
-                    @error('status')
-                        <div class="error-text">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <button type="submit" class="btn-submit">Simpan Paket</button>
-            </form>
-        </div>
+            <div class="form-actions">
+                <a href="{{ route('admin.paket-data.index') }}" class="btn btn-secondary">Batal</a>
+                <button class="btn btn-primary">Simpan Paket</button>
+            </div>
+        </form>
     </div>
-</body>
-</html>
+</div>
+@endsection
+
+@section('extra-scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+
+    const fileBtn = document.getElementById('fileBtn');
+    const fileInput = document.getElementById('imageInput');
+    const fileName = document.getElementById('fileName');
+    const imageBox = document.getElementById('imageBox');
+
+    // Use click to open file dialog; the label[for="imageInput"] will also trigger it in most browsers.
+    fileBtn.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', function(){
+        const file = this.files[0];
+        if(!file){ 
+            fileName.textContent = '';
+            imageBox.innerHTML = '<span class="muted">Belum ada gambar</span>';
+            return;
+        }
+
+        fileName.textContent = file.name;
+        const reader = new FileReader();
+        reader.onload = e => imageBox.innerHTML = `<img src="${e.target.result}">`;
+        reader.readAsDataURL(file);
+    });
+
+    const switchEl = document.getElementById('popSwitch');
+    if(switchEl){
+        const input = switchEl.querySelector('.switch-input');
+        function sync(){ switchEl.classList.toggle('on', input.checked); }
+        sync();
+        switchEl.addEventListener('click', () => { input.checked = !input.checked; sync(); });
+    }
+});
+</script>
+@endsection

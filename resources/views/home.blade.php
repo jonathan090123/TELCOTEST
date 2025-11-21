@@ -257,11 +257,7 @@
                                             <li>Paket data sesuai kebutuhan Anda</li>
                                         @endif
                                     </ul>
-                                    @auth
-                                        <a href="{{ route('paket-data.beli', $paket->id) }}" class="btn-carousel">Beli Sekarang</a>
-                                    @else
-                                        <a href="{{ route('paket-data.show', $paket->id) }}" class="btn-carousel">Lihat Detail</a>
-                                    @endauth
+                                    <a href="{{ route('paket-data.show', $paket->id) }}" class="btn-carousel">Lihat Detail</a>
                                 </div>
                                 <div class="product-visual">
                                     <div class="product-icon">📱</div>

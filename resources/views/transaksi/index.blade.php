@@ -143,7 +143,7 @@
     </div>
 
     <div class="filter-section">
-        <a href="{{ route('paket-data.index') }}" class="btn">Kembali ke Beranda</a>
+        <a href="{{ route('home') }}#paket-data" class="btn">Kembali ke Beranda</a>
     </div>
 
     @if($transaksis->count() > 0)
@@ -197,8 +197,8 @@
                 <div class="empty-state-icon">📭</div>
                 <h3>Belum ada transaksi</h3>
                 <p>Anda belum melakukan pembelian paket data</p>
-                <div style="margin-top: 1.5rem;">
-                    <a href="{{ route('paket-data.index') }}" class="btn">Beli Paket Data</a>
+                    <div style="margin-top: 1.5rem;">
+                    <a href="{{ route('home') }}#paket-data" class="btn">Beli Paket Data</a>
                 </div>
             </div>
         </div>

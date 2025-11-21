@@ -203,9 +203,9 @@
         </div>
 
         <div class="stat-card">
-            <h3>🔑 Admin Users</h3>
-            <div class="number">{{ App\Models\User::where('role', 'admin')->count() }}</div>
-            <div class="description">Pengguna dengan role admin</div>
+            <h3>📦 Total Produk</h3>
+            <div class="number">{{ App\Models\PaketData::count() }}</div>
+            <div class="description">Jumlah paket data tersedia di katalog</div>
         </div>
     </div>
 
@@ -218,6 +218,9 @@
             </a>
             <a href="{{ route('admin.transaksi.index') }}" class="action-btn">
                 💳 Manajemen Transaksi
+            </a>
+            <a href="{{ route('admin.paket-data.index') }}" class="action-btn">
+                📦 Manajemen Paket Data
             </a>
         </div>
     </div>

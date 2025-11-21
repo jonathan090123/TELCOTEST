@@ -169,11 +169,7 @@
                                 </div>
 
                                 <div style="margin-top:1rem;">
-                                    @auth
-                                        <a href="{{ route('paket-data.beli', $paket->id) }}" class="btn-beli">Beli Sekarang</a>
-                                    @else
-                                        <a href="{{ route('paket-data.show', $paket->id) }}" class="btn-beli">Lihat Detail</a>
-                                    @endauth
+                                    <a href="{{ route('paket-data.show', $paket->id) }}" class="btn-beli">Lihat Detail</a>
                                 </div>
                             </div>
                         </div>

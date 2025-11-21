@@ -27,19 +27,27 @@
         .btn-create {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 0.8rem 1.5rem;
+            padding: 0.6rem 1rem;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             text-decoration: none;
-            display: inline-block;
-            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.18s, box-shadow 0.18s;
+            font-size: 0.95rem;
+            margin-left: 0 !important;
+            margin-right: 1rem !important;
+            transform: translateX(-8px);
         }
+
+        .page-header .btn-create { margin-left: auto; align-self: center; }
 
         .btn-create:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.28);
         }
 
         .filter-section {
@@ -195,13 +203,13 @@
         </div>
     </div>
 
-    @if($paketData->count() > 0)
+    @if(isset($pakets) && $pakets->count() > 0)
         <div class="table-container">
             <table class="paket-table">
                 <thead>
                     <tr>
                         <th>Nama</th>
-                        <th>Kuota</th>
+                        <th>Kuota / Category</th>
                         <th>Masa Aktif</th>
                         <th>Harga</th>
                         <th>Status</th>
@@ -209,12 +217,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($paketData as $paket)
+                    @forelse($pakets as $paket)
                         <tr>
-                            <td>{{ $paket->nama }}</td>
-                            <td>{{ $paket->kuota }}</td>
-                            <td>{{ $paket->masa_aktif }} hari</td>
-                            <td>Rp {{ number_format($paket->harga, 0, ',', '.') }}</td>
+                            <td>{{ $paket->product_name ?? $paket->nama }}</td>
+                            <td>{{ $paket->ml_category ?? $paket->kuota }}</td>
+                            <td>{{ $paket->masa_aktif ?? '-' }} hari</td>
+                            <td>{{ $paket->formatted_price ?? $paket->formatted_harga ?? 'Rp ' . number_format($paket->price ?? $paket->harga ?? 0,0,',','.') }}</td>
                             <td>
                                 <span class="status-badge status-{{ $paket->status }}">
                                     {{ ucfirst($paket->status) }}
@@ -238,6 +246,9 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+        <div class="mt-3">
+            {{ $pakets->links() }}
         </div>
     @else
         <div class="table-container">

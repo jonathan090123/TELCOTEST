@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PaketDataController;
+use App\Http\Controllers\Admin\PaketDataController as AdminPaketDataController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 
@@ -96,4 +97,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     // Manajemen Transaksi Admin
     Route::get('/transaksi', [DashboardController::class, 'transaksiIndex'])->name('transaksi.index');
+    
+    // Admin Paket Data CRUD
+    Route::resource('paket-data', AdminPaketDataController::class)->names('paket-data');
 });

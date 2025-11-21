@@ -125,6 +125,30 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
+        /* Generic button utilities used across pages */
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(102,126,234,0.15);
+        }
+
+        .btn-secondary {
+            background: #eef2f7;
+            color: #333;
+            border: 1px solid #e2e8f0;
+        }
+
+        .mt-3 { margin-top: 1rem; }
+
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -197,37 +221,57 @@
             font-weight: 600 !important;
         }
 
+        /* Page transition helper for SPA sections */
+        .page-transition {
+            transition: opacity 360ms cubic-bezier(.2,.9,.2,1), transform 360ms cubic-bezier(.2,.9,.2,1);
+            will-change: opacity, transform;
+        }
+
+        .page-transition.is-fading {
+            opacity: 0;
+            transform: translateY(8px);
+            pointer-events: none;
+        }
+
         @yield('extra-styles')
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="{{ route('home') }}" class="logo">
-                <img src="{{ asset('img/icon.jpg') }}" alt="TelcoApp">
-            </a>
-            
-            @component('components.navbar-menu')
-            @endcomponent
+    <!-- Navbar (can be overridden by admin-navbar section). If not overridden and we're in admin area, include admin component. Otherwise render default navbar-menu. -->
+    @hasSection('admin-navbar')
+        @yield('admin-navbar')
+    @elseif(request()->is('admin/*') || request()->routeIs('admin.*'))
+        @include('components.admin-navbar')
+    @else
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="{{ route('home') }}" class="logo">
+                    <img src="{{ asset('img/icon.jpg') }}" alt="TelcoApp">
+                </a>
+                
+                @component('components.navbar-menu')
+                @endcomponent
 
-            <div class="nav-icons">
-                @auth
-                    <a href="{{ route('profile.index') }}" class="icon-link" title="Profile">👤</a>
-                    <form action="{{ route('logout') }}" method="POST" class="logout-form">
-                        @csrf
-                        <button type="submit" class="logout-btn">Logout</button>
-                    </form>
-                @else
-                    <a href="{{ route('login') }}" class="btn-action">Login</a>
-                @endauth
+                <div class="nav-icons">
+                    @auth
+                        <a href="{{ route('profile.index') }}" class="icon-link" title="Profile">👤</a>
+                        <form action="{{ route('logout') }}" method="POST" class="logout-form">
+                            @csrf
+                            <button type="submit" class="logout-btn">Logout</button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="btn-action">Login</a>
+                    @endauth
+                </div>
+
+                <button class="mobile-menu-btn">☰</button>
             </div>
+        </nav>
+    @endif
 
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-
-    @yield('content')
+    <main id="app-content" class="page-transition">
+        @yield('content')
+    </main>
 
     <script>
         // Mobile menu toggle
@@ -236,20 +280,32 @@
             navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
         });
 
-        // SPA Navigation - Smooth scroll for anchor links
+        // SPA Navigation - Smooth scroll for anchor links with a fade transition
         @if(Route::currentRouteName() === 'home')
             const navLinks = document.querySelectorAll('.nav-link');
-            
+            const appContent = document.getElementById('app-content');
+            const FADE_DURATION = 360; // should match CSS transition duration (ms)
+
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href').substring(1);
                     const targetSection = document.getElementById(targetId);
-                    
-                    if (targetSection) {
+
+                    if (!targetSection) return;
+
+                    // Add fading class to content
+                    appContent.classList.add('is-fading');
+
+                    // Wait for fade-out, then scroll and fade-in
+                    setTimeout(() => {
                         targetSection.scrollIntoView({ behavior: 'smooth' });
-                        updateActiveNavLink();
-                    }
+                        // small delay to allow smooth scroll to start
+                        setTimeout(() => {
+                            appContent.classList.remove('is-fading');
+                            updateActiveNavLink();
+                        }, 120);
+                    }, FADE_DURATION - 120);
                 });
             });
 
@@ -259,10 +315,10 @@
             function updateActiveNavLink() {
                 let current = 'home';
                 const sections = document.querySelectorAll('section[id]');
-                
+
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    if (window.pageYOffset >= sectionTop - 100) {
+                    if (window.pageYOffset >= sectionTop - 120) {
                         current = section.getAttribute('id');
                     }
                 });

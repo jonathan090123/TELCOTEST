@@ -522,7 +522,7 @@
                                         @endif
                                     </ul>
                                     @auth
-                                        <a href="{{ route('paket-data.beli', $paket->id) }}" class="btn-primary">Beli Sekarang</a>
+                                        <a href="{{ route('paket-data.show', $paket->id) }}" class="btn-primary">Lihat Detail</a>
                                     @else
                                         <a href="{{ route('paket-data.show', $paket->id) }}" class="btn-primary">Lihat Detail</a>
                                     @endauth
@@ -570,11 +570,7 @@
                             @endif
                         </ul>
                         <div class="paket-grid-footer">
-                            @auth
-                                <a href="{{ route('paket-data.beli', $paket->id) }}" class="btn-primary">Beli Sekarang</a>
-                            @else
-                                <a href="{{ route('paket-data.show', $paket->id) }}" class="btn-primary">Lihat Detail</a>
-                            @endauth
+                            <a href="{{ route('paket-data.show', $paket->id) }}" class="btn-primary">Lihat Detail</a>
                         </div>
                     </div>
                 </div>

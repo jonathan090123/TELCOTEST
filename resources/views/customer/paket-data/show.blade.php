@@ -53,14 +53,30 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: white;
+            background: transparent;
+            color: #333333;
             text-decoration: none;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             font-weight: 600;
+            padding: 0.375rem 0.65rem;
+            border-radius: 8px;
+            border: 1px solid #e6e9f5;
+            transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
         }
 
         .back-link:hover {
-            text-decoration: underline;
+            background: #ffffff;
+            border-color: #d6dbf7;
+            transform: translateY(-1px);
+            text-decoration: none;
+        }
+
+        .back-link .icon {
+            display: inline-block;
+            color: #667eea;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1;
         }
 
         .detail-card {
@@ -235,8 +251,9 @@
 @endsection
 
 @section('content')
-        <a href="{{ route('paket-data.index') }}" class="back-link">
-            ← Kembali ke Daftar Paket
+        <a href="{{ route('home') }}#paket-data" class="back-link">
+            <span class="icon">←</span>
+            <span>Kembali ke Daftar Paket</span>
         </a>
 
         <div class="detail-card">
@@ -297,7 +314,7 @@
                             🔐 Login untuk Membeli
                         </a>
                     @endauth
-                    <a href="{{ route('paket-data.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('home') }}#paket-data" class="btn btn-secondary">
                         Lihat Paket Lain
                     </a>
                 </div>
