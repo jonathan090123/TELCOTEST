@@ -227,6 +227,11 @@
         <form action="{{ route('admin.paket-data.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
+            {{-- Hidden fields to support controller expecting new names --}}
+            <input type="hidden" name="product_name" id="product_name_hidden" value="{{ old('product_name') }}">
+            <input type="hidden" name="price" id="price_hidden" value="{{ old('price') }}">
+            <input type="hidden" name="description" id="description_hidden" value="{{ old('description') }}">
+
             <div class="row">
                 <div class="col">
 
@@ -266,11 +271,11 @@
                     <div class="upload-box" id="imageBox"><span class="muted">Belum ada gambar</span></div>
 
                     <div class="file-row">
-                        <label id="fileBtn" for="imageInput" class="file-btn" role="button">Pilih Gambar</label>
+                        <label for="imageInput" id="fileBtn" class="file-btn">Pilih Gambar</label>
                         <span id="fileName" class="file-name"></span>
                     </div>
 
-                    <input type="file" name="image" id="imageInput" accept="image/*" style="position:absolute;left:-9999px;" aria-hidden="true">
+                    <input type="file" name="image" id="imageInput" accept="image/*" style="display:none;">
 
                     <div class="muted" style="margin-top:0.5rem;">Disarankan 800×600 — Maks 2MB.</div>
                 </div>
@@ -294,25 +299,55 @@ document.addEventListener('DOMContentLoaded', function(){
     const fileName = document.getElementById('fileName');
     const imageBox = document.getElementById('imageBox');
 
-    // Use click to open file dialog; the label[for="imageInput"] will also trigger it in most browsers.
-    fileBtn.addEventListener('click', () => {
-        fileInput.click();
+    console.log('DOM loaded - Elements:', {
+        fileBtn: !!fileBtn,
+        fileInput: !!fileInput,
+        fileName: !!fileName,
+        imageBox: !!imageBox
     });
 
-    fileInput.addEventListener('change', function(){
-        const file = this.files[0];
-        if(!file){ 
-            fileName.textContent = '';
-            imageBox.innerHTML = '<span class="muted">Belum ada gambar</span>';
-            return;
-        }
+    // Ensure file input exists and add change listener
+    if(fileInput) {
+        fileInput.addEventListener('change', function(){
+            console.log('Change event: files count =', this.files.length);
+            
+            if(this.files.length === 0) {
+                console.log('No file selected');
+                if(fileName) fileName.textContent = '';
+                if(imageBox) imageBox.innerHTML = '<span class="muted">Belum ada gambar</span>';
+                return;
+            }
 
-        fileName.textContent = file.name;
-        const reader = new FileReader();
-        reader.onload = e => imageBox.innerHTML = `<img src="${e.target.result}">`;
-        reader.readAsDataURL(file);
-    });
+            const file = this.files[0];
+            console.log('File:', file.name, 'Type:', file.type, 'Size:', file.size);
+            
+            if(fileName) fileName.textContent = file.name;
+            
+            // Read file and create preview
+            const reader = new FileReader();
+            
+            reader.onload = function(event) {
+                console.log('FileReader loaded, inserting image');
+                const dataUrl = event.target.result;
+                if(imageBox) {
+                    imageBox.innerHTML = '<img src="' + dataUrl + '" alt="Preview" style="max-height:150px; max-width:100%; border-radius:10px; object-fit:contain;">';
+                    console.log('Image inserted to imageBox');
+                }
+            };
+            
+            reader.onerror = function(err) {
+                console.error('FileReader error:', err);
+                if(imageBox) imageBox.innerHTML = '<span class="muted">Error membaca file</span>';
+            };
+            
+            console.log('Starting readAsDataURL...');
+            reader.readAsDataURL(file);
+        });
+    } else {
+        console.error('imageInput element not found!');
+    }
 
+    // Toggle switch handler
     const switchEl = document.getElementById('popSwitch');
     if(switchEl){
         const input = switchEl.querySelector('.switch-input');
@@ -323,3 +358,21 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 @endsection
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    const form = document.querySelector('form[action="{{ route('admin.paket-data.store') }}"]');
+    if(!form) return;
+    form.addEventListener('submit', function(){
+        const nama = document.querySelector('input[name="nama"]')?.value || '';
+        const harga = document.querySelector('input[name="harga"]')?.value || '';
+        const deskripsi = document.querySelector('textarea[name="deskripsi"]')?.value || '';
+        const pName = document.getElementById('product_name_hidden');
+        const pPrice = document.getElementById('price_hidden');
+        const pDesc = document.getElementById('description_hidden');
+        if(pName) pName.value = nama;
+        if(pPrice) pPrice.value = harga;
+        if(pDesc) pDesc.value = deskripsi;
+    });
+});
+</script>

@@ -87,6 +87,11 @@
             @csrf
             @method('PUT')
 
+            {{-- Hidden fields to support controller expecting new names --}}
+            <input type="hidden" name="product_name" id="product_name_hidden" value="{{ old('product_name', $paket->product_name ?? $paket->nama) }}">
+            <input type="hidden" name="price" id="price_hidden" value="{{ old('price', $paket->price ?? $paket->harga) }}">
+            <input type="hidden" name="description" id="description_hidden" value="{{ old('description', $paket->description ?? $paket->deskripsi) }}">
+
             <div class="row">
                 <div class="col">
                     <div class="field">
@@ -195,3 +200,21 @@
     });
     </script>
     @endsection
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    const form = document.querySelector('form[action="{{ route('admin.paket-data.update', $paket->id) }}"]');
+    if(!form) return;
+    form.addEventListener('submit', function(){
+        const nama = document.querySelector('input[name="nama"]')?.value || '';
+        const harga = document.querySelector('input[name="harga"]')?.value || '';
+        const deskripsi = document.querySelector('textarea[name="deskripsi"]')?.value || '';
+        const pName = document.getElementById('product_name_hidden');
+        const pPrice = document.getElementById('price_hidden');
+        const pDesc = document.getElementById('description_hidden');
+        if(pName) pName.value = nama;
+        if(pPrice) pPrice.value = harga;
+        if(pDesc) pDesc.value = deskripsi;
+    });
+});
+</script>

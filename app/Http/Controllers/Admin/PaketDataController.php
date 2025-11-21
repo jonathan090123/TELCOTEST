@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PaketData;
+use Illuminate\Support\Facades\Schema;
 
 class PaketDataController extends Controller
 {
@@ -44,16 +45,51 @@ class PaketDataController extends Controller
 
         $data['is_popular'] = $request->has('is_popular') ? (bool)$request->input('is_popular') : false;
 
-        PaketData::create([
-            'product_name' => $data['product_name'],
-            'ml_category' => $data['ml_category'] ?? null,
-            'operator' => $data['operator'] ?? null,
-            'price' => $data['price'],
-            'description' => $data['description'] ?? null,
-            'image_url' => $data['image_url'] ?? null,
-            'is_popular' => $data['is_popular'],
-            'status' => 'active',
-        ]);
+        // Build insert payload only including columns that exist in DB (legacy-safe)
+        $insert = [];
+        if (Schema::hasColumn('paket_data', 'product_name')) {
+            $insert['product_name'] = $data['product_name'];
+        }
+        if (Schema::hasColumn('paket_data', 'ml_category')) {
+            $insert['ml_category'] = $data['ml_category'] ?? null;
+        }
+        if (Schema::hasColumn('paket_data', 'operator')) {
+            $insert['operator'] = $data['operator'] ?? null;
+        }
+        if (Schema::hasColumn('paket_data', 'price')) {
+            $insert['price'] = $data['price'];
+        }
+        if (Schema::hasColumn('paket_data', 'description')) {
+            $insert['description'] = $data['description'] ?? null;
+        }
+        if (isset($data['image_url']) && Schema::hasColumn('paket_data', 'image_url')) {
+            $insert['image_url'] = $data['image_url'];
+        }
+        if (Schema::hasColumn('paket_data', 'is_popular')) {
+            $insert['is_popular'] = $data['is_popular'];
+        }
+        if (Schema::hasColumn('paket_data', 'status')) {
+            $insert['status'] = 'active';
+        }
+
+        // Legacy columns fallback
+        if (Schema::hasColumn('paket_data', 'nama')) {
+            $insert['nama'] = $data['product_name'];
+        }
+        if (Schema::hasColumn('paket_data', 'kuota') && $request->has('kuota')) {
+            $insert['kuota'] = $request->input('kuota');
+        }
+        if (Schema::hasColumn('paket_data', 'masa_aktif') && $request->has('masa_aktif')) {
+            $insert['masa_aktif'] = $request->input('masa_aktif');
+        }
+        if (Schema::hasColumn('paket_data', 'harga')) {
+            $insert['harga'] = $data['price'];
+        }
+        if (Schema::hasColumn('paket_data', 'deskripsi')) {
+            $insert['deskripsi'] = $data['description'] ?? null;
+        }
+
+        PaketData::create($insert);
 
         return redirect()->route('admin.paket-data.index')->with('success', 'Paket berhasil dibuat.');
     }

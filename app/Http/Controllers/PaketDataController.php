@@ -128,6 +128,7 @@ class PaketDataController extends Controller
             'harga' => 'required|numeric|min:0',
             'deskripsi' => 'nullable|string',
             'status' => 'required|in:active,inactive',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         PaketData::create($validated);
@@ -155,6 +156,7 @@ class PaketDataController extends Controller
             'harga' => 'required|numeric|min:0',
             'deskripsi' => 'nullable|string',
             'status' => 'required|in:active,inactive',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         $paket->update($validated);
