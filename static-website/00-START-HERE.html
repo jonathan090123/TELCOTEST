@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Website Index - TelcoApp</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .card h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 0.8rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .card a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: #f0f4ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        .checklist {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            color: #333;
+        }
+
+        .checklist li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #e9ecef;
+            margin-top: 2rem;
+        }
+
+        .emoji {
+            font-size: 1.3rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📦 Static Website - TelcoApp</h1>
+            <p>Pure HTML, CSS & JavaScript (No Laravel/Blade)</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Statistics -->
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">21</div>
+                    <div class="stat-label">Total Files</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">16</div>
+                    <div class="stat-label">HTML Pages</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">~155 KB</div>
+                    <div class="stat-label">Total Size</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Complete</div>
+                </div>
+            </div>
+
+            <!-- Quick Access -->
+            <div class="section">
+                <h2><span class="emoji">🚀</span> Quick Access</h2>
+                <div class="button-group">
+                    <a href="index.html" class="btn btn-primary">🏠 Home Page</a>
+                    <a href="auth/login.html" class="btn btn-primary">🔐 Login</a>
+                    <a href="admin/index.html" class="btn btn-primary">👨‍💼 Admin Panel</a>
+                    <a href="customer/index.html" class="btn btn-primary">👤 Customer Portal</a>
+                </div>
+            </div>
+
+            <!-- Main Pages -->
+            <div class="section">
+                <h2><span class="emoji">📄</span> Main Pages</h2>
+                <div class="section-content">
+                    <div class="card">
+                        <h3>🏠 Home</h3>
+                        <p>Halaman beranda dengan hero section dan carousel paket data</p>
+                        <a href="index.html">Buka →</a>
+                    </div>
+                    <div class="card">
+                        <h3>🔐 Login</h3>
+                        <p>Form login dengan validasi dan demo credentials</p>
+                        <a href="auth/login.html">Buka →</a>
+                    </div>
+                    <div class="card">
+                        <h3>📝 Register</h3>
+                        <p>Form registrasi dengan validasi lengkap</p>
+                        <a href="auth/register.html">Buka →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Panel -->
+            <div class="section">
+                <h2><span class="emoji">👨‍💼</span> Admin Panel</h2>
+                <p style="margin-bottom: 1rem; color: #666;">Kelola sistem TelcoApp dengan dashboard lengkap dan management pages</p>
+                <div class="section-content">
+                    <div class="card">
+                        <h3>📊 Dashboard</h3>
+                        <p>Overview dengan statistik dan quick links</p>
+                        <a href="admin/dashboard.html">Buka →</a>
+                    </div>
+                    <div class="card">
+                        <h3>📦 Paket Data</h3>
+                        <p>Kelola semua paket data dengan search & filter</p>
+                        <a href="admin/paket-data/index.html">Buka →</a>
+                    </div>
+                    <div class="card">
+                        <h3>💳 Transaksi</h3>
+                        <p>Pantau semua transaksi pengguna dengan status</p>
+                        <a href="admin/transaksi/index.html">Buka →</a>
+                    </div>
+                    <div class="card">
+                        <h3>👥 Users</h3>
+                        <p>Kelola pengguna sistem dengan role management</p>
+                        <a href="admin/users/index.html">Buka →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Portal -->
+            <div class="section">
+                <h2><span class="emoji">🛍️</span> Customer Portal</h2>
+                <p style="margin-bottom: 1rem; color: #666;">Platform lengkap untuk customer membeli paket dan mengelola transaksi</p>
+                <div class="section-content">
+                    <div class="card">
+                        <h3>📊 Dashboard</h3>
+                        <p>Lihat overview paket aktif dan statistik</p>
+                        <a href="customer/dashboard.html">Buka →</a>
+                    </div>
+                    <div class="card">
+                        <h3>📦 Paket Data</h3>
+                        <p>Browse dan beli paket data yang tersedia</p>
+                        <a href="customer/paket-data/index.html">Buka →</a>
+                    </div>
+                    <div class="card">
+                        <h3>💳 Transaksi</h3>
+                        <p>Lihat riwayat transaksi dan status pembayaran</p>
+                        <a href="customer/transaksi/index.html">Buka →</a>
+                    </div>
+                    <div class="card">
+                        <h3>👤 Profile</h3>
+                        <p>Kelola informasi pribadi dan keamanan akun</p>
+                        <a href="customer/profile/index.html">Buka →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Credentials -->
+            <div class="section">
+                <h2><span class="emoji">🔑</span> Demo Credentials</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px;">
+                        <strong style="color: #667eea; display: block; margin-bottom: 0.5rem;">👨‍💼 Admin Account</strong>
+                        <div style="color: #666; font-size: 0.9rem;">
+                            <div>Email: <strong>admin@telcoapp.com</strong></div>
+                            <div>Password: <strong>password123</strong></div>
+                        </div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px;">
+                        <strong style="color: #667eea; display: block; margin-bottom: 0.5rem;">👤 Customer Account</strong>
+                        <div style="color: #666; font-size: 0.9rem;">
+                            <div>Email: <strong>user@telcoapp.com</strong></div>
+                            <div>Password: <strong>password123</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="section">
+                <h2><span class="emoji">✨</span> Features</h2>
+                <ul class="checklist">
+                    <li>Responsive Design (Mobile, Tablet, Desktop)</li>
+                    <li>Form Validation dengan Error Messages</li>
+                    <li>Data Tables dengan Search & Filter</li>
+                    <li>Carousel Navigation</li>
+                    <li>Status Badges & Icons</li>
+                    <li>Modern UI/UX dengan Gradients</li>
+                    <li>Mobile Menu Toggle</li>
+                    <li>Smooth Animations & Transitions</li>
+                    <li>Utility Functions & Helpers</li>
+                    <li>No External Dependencies</li>
+                </ul>
+            </div>
+
+            <!-- Documentation -->
+            <div class="section">
+                <h2><span class="emoji">📚</span> Documentation</h2>
+                <div class="section-content">
+                    <div class="card">
+                        <h3>README.md</h3>
+                        <p>Overview lengkap dan cara penggunaan website</p>
+                    </div>
+                    <div class="card">
+                        <h3>STRUCTURE.md</h3>
+                        <p>Penjelasan detail struktur folder dan files</p>
+                    </div>
+                    <div class="card">
+                        <h3>GETTING_STARTED.md</h3>
+                        <p>Panduan quick start dan troubleshooting</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How to Share -->
+            <div class="section">
+                <h2><span class="emoji">📤</span> Cara Mengirim ke Teman</h2>
+                <div class="section-content">
+                    <div class="card">
+                        <h3>1️⃣ ZIP File</h3>
+                        <p>Right-click folder → Compress → Kirim via email/chat</p>
+                    </div>
+                    <div class="card">
+                        <h3>2️⃣ GitHub</h3>
+                        <p>Push ke repository → Share URL ke teman</p>
+                    </div>
+                    <div class="card">
+                        <h3>3️⃣ Netlify</h3>
+                        <p>Drag folder ke Netlify → Instant live URL</p>
+                    </div>
+                    <div class="card">
+                        <h3>4️⃣ Cloud Storage</h3>
+                        <p>Upload ke Google Drive/Dropbox → Share link</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- File Structure -->
+            <div class="section">
+                <h2><span class="emoji">📁</span> File Structure</h2>
+                <pre style="background: #f8f9fa; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.85rem;">
+static-website/
+├── index.html (Buka ini dulu!)
+├── css/
+│   ├── style.css
+│   └── auth.css
+├── js/
+│   ├── auth.js
+│   └── utilities.js
+├── auth/
+│   ├── login.html
+│   └── register.html
+├── admin/
+│   ├── index.html
+│   ├── dashboard.html
+│   ├── paket-data/index.html
+│   ├── transaksi/index.html
+│   └── users/index.html
+├── customer/
+│   ├── index.html
+│   ├── dashboard.html
+│   ├── paket-data/index.html
+│   ├── transaksi/index.html
+│   └── profile/index.html
+└── Documentation files (README, STRUCTURE, GETTING_STARTED)
+                </pre>
+            </div>
+
+            <!-- Technology Stack -->
+            <div class="section">
+                <h2><span class="emoji">🛠️</span> Technology Stack</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏗️</div>
+                        <div style="font-weight: 600; color: #667eea;">HTML5</div>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.3rem;">Semantic Markup</div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
+                        <div style="font-weight: 600; color: #667eea;">CSS3</div>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.3rem;">Responsive Design</div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+                        <div style="font-weight: 600; color: #667eea;">JavaScript</div>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.3rem;">Vanilla JS</div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📦</div>
+                        <div style="font-weight: 600; color: #667eea;">Pure</div>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.3rem;">No Dependencies</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Info -->
+            <div class="section">
+                <h2><span class="emoji">ℹ️</span> Info</h2>
+                <div style="background: #f0f4ff; border-left: 4px solid #667eea; padding: 1rem; border-radius: 5px;">
+                    <p style="margin-bottom: 0.5rem;"><strong>Status:</strong> ✅ READY TO USE</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Total Files:</strong> 21 files</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Total Size:</strong> ~155 KB (Sangat ringan!)</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Created:</strong> 22 November 2025</p>
+                    <p><strong>Format:</strong> HTML/CSS/JavaScript murni (NO Laravel/Blade)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Static Website TelcoApp | Pure HTML/CSS/JavaScript | Ready to Share! 🚀</p>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">Buka <strong>index.html</strong> untuk memulai</p>
+        </div>
+    </div>
+</body>
+</html>

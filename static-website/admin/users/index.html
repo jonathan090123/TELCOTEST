@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen User - Admin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .users-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .users-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .users-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .users-header p {
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        .stat-info {
+            text-align: right;
+        }
+
+        .stat-info .number {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .stat-info .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.3rem;
+        }
+
+        .users-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table thead {
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        table thead th {
+            padding: 1.2rem;
+            text-align: left;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        table tbody tr:hover {
+            background: #f8f9ff;
+        }
+
+        table tbody td {
+            padding: 1.2rem;
+            color: #333;
+        }
+
+        table tbody td.no {
+            color: #999;
+            font-weight: 600;
+            width: 50px;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .role-admin {
+            background: #667eea;
+            color: white;
+        }
+
+        .role-customer {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-action-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-edit {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .users-header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .stat-info {
+                text-align: center;
+            }
+
+            .users-container {
+                padding: 1rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            table thead th,
+            table tbody td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="https://via.placeholder.com/48" alt="TelcoApp">
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="../dashboard.html">Dashboard</a></li>
+                <li><a href="../paket-data/index.html">Paket Data</a></li>
+                <li><a href="../transaksi/index.html">Transaksi</a></li>
+                <li><a href="index.html" class="active">Users</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="#profile" class="icon-link" title="Profile">👤</a>
+                <a href="../../auth/login.html" class="btn-action">Logout</a>
+            </div>
+
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <div class="users-container">
+            <!-- Header -->
+            <div class="users-header">
+                <div>
+                    <h1>👥 Manajemen User</h1>
+                    <p>Kelola pengguna sistem</p>
+                </div>
+                <div class="stat-info">
+                    <div class="number">2,450</div>
+                    <div class="label">Total User</div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="users-content">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Telepon</th>
+                                <th>Role</th>
+                                <th>Tanggal Daftar</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="no">1</td>
+                                <td>Admin User</td>
+                                <td>admin@telcoapp.com</td>
+                                <td>08123456789</td>
+                                <td><span class="role-badge role-admin">Admin</span></td>
+                                <td>2025-01-01 08:00</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action-small btn-edit" onclick="alert('Edit user')">Edit</button>
+                                        <button class="btn-action-small btn-delete" onclick="alert('Delete user')">Hapus</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="no">2</td>
+                                <td>John Doe</td>
+                                <td>john@example.com</td>
+                                <td>08234567890</td>
+                                <td><span class="role-badge role-customer">Customer</span></td>
+                                <td>2025-01-05 10:30</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action-small btn-edit" onclick="alert('Edit user')">Edit</button>
+                                        <button class="btn-action-small btn-delete" onclick="alert('Delete user')">Hapus</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="no">3</td>
+                                <td>Jane Smith</td>
+                                <td>jane@example.com</td>
+                                <td>08345678901</td>
+                                <td><span class="role-badge role-customer">Customer</span></td>
+                                <td>2025-01-10 14:15</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action-small btn-edit" onclick="alert('Edit user')">Edit</button>
+                                        <button class="btn-action-small btn-delete" onclick="alert('Delete user')">Hapus</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="no">4</td>
+                                <td>Bob Wilson</td>
+                                <td>bob@example.com</td>
+                                <td>08456789012</td>
+                                <td><span class="role-badge role-customer">Customer</span></td>
+                                <td>2025-01-15 09:45</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action-small btn-edit" onclick="alert('Edit user')">Edit</button>
+                                        <button class="btn-action-small btn-delete" onclick="alert('Delete user')">Hapus</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../js/utilities.js"></script>
+</body>
+</html>

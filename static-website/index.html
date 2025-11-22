@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda - TelcoApp</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 3rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .product-info h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .product-data {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .product-price span {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .product-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            color: #666;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-features li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .product-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-icon {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            color: white;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            z-index: 10;
+            color: #667eea;
+        }
+
+        .carousel-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-btn.prev {
+            left: 1rem;
+        }
+
+        .carousel-btn.next {
+            right: 1rem;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .indicator.active {
+            background: white;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .btn-carousel {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-carousel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .product-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-info h2 {
+                font-size: 1.8rem;
+            }
+
+            .product-data {
+                font-size: 2.5rem;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/48" alt="TelcoApp">
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Beranda</a></li>
+                <li><a href="#paket">Paket Data</a></li>
+                <li><a href="#tentang">Tentang Kami</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="auth/login.html" class="btn-action">Login</a>
+            </div>
+
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>🚀 Selamat Datang di TelcoApp</h1>
+            <p>Solusi terpadu untuk mengelola paket data telekomunikasi Anda</p>
+            <a href="auth/login.html" class="btn btn-action" style="padding: 1rem 2rem; font-size: 1.1rem;">Mulai Sekarang</a>
+        </section>
+
+        <!-- Carousel Section -->
+        <section class="carousel-container" id="paket">
+            <h2 style="text-align: center; color: white; margin-bottom: 2rem; font-size: 2rem;">Paket Data Kami</h2>
+            
+            <div class="carousel">
+                <div class="carousel-track">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide">
+                        <div class="product-card">
+                            <div class="product-info">
+                                <h2>Paket Hemat</h2>
+                                <div class="product-data">3GB</div>
+                                <div class="product-price">Rp <span>25.000</span></div>
+                                <ul class="product-features">
+                                    <li>Internet 3GB/bulan</li>
+                                    <li>Kecepatan hingga 4G LTE</li>
+                                    <li>Berlaku 30 hari</li>
+                                    <li>Support 24/7</li>
+                                </ul>
+                                <button class="btn-carousel">Beli Paket</button>
+                            </div>
+                            <div class="product-visual">
+                                <div class="product-icon">📦</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide">
+                        <div class="product-card">
+                            <div class="product-info">
+                                <h2>Paket Standar</h2>
+                                <div class="product-data">10GB</div>
+                                <div class="product-price">Rp <span>50.000</span></div>
+                                <ul class="product-features">
+                                    <li>Internet 10GB/bulan</li>
+                                    <li>Kecepatan hingga 4G LTE</li>
+                                    <li>Berlaku 30 hari</li>
+                                    <li>Support 24/7</li>
+                                    <li>Bonus kuota sosmed</li>
+                                </ul>
+                                <button class="btn-carousel">Beli Paket</button>
+                            </div>
+                            <div class="product-visual">
+                                <div class="product-icon">⭐</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide">
+                        <div class="product-card">
+                            <div class="product-info">
+                                <h2>Paket Premium</h2>
+                                <div class="product-data">30GB</div>
+                                <div class="product-price">Rp <span>100.000</span></div>
+                                <ul class="product-features">
+                                    <li>Internet 30GB/bulan</li>
+                                    <li>Kecepatan hingga 5G</li>
+                                    <li>Berlaku 30 hari</li>
+                                    <li>Support Priority 24/7</li>
+                                    <li>Bonus kuota sosmed</li>
+                                    <li>Unlimited streaming</li>
+                                </ul>
+                                <button class="btn-carousel">Beli Paket</button>
+                            </div>
+                            <div class="product-visual">
+                                <div class="product-icon">👑</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-btn prev">❮</button>
+                <button class="carousel-btn next">❯</button>
+            </div>
+
+            <div class="carousel-indicators">
+                <button class="indicator active" data-slide="0"></button>
+                <button class="indicator" data-slide="1"></button>
+                <button class="indicator" data-slide="2"></button>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="hero" id="tentang">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Tentang TelcoApp</h2>
+            <p style="margin-bottom: 1rem;">
+                TelcoApp adalah platform terpercaya untuk mengelola layanan telekomunikasi digital Anda.
+                Dengan interface yang user-friendly dan fitur-fitur lengkap, kami memudahkan Anda untuk membeli,
+                mengelola, dan melacak paket data kapan saja, di mana saja.
+            </p>
+            <p>
+                Bergabunglah dengan ribuan pengguna yang telah mempercayai TelcoApp untuk kebutuhan layanan data mereka.
+            </p>
+        </section>
+    </main>
+
+    <script src="js/utilities.js"></script>
+    <script>
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const track = document.querySelector('.carousel-track');
+        const indicators = document.querySelectorAll('.indicator');
+
+        function showSlide(n) {
+            currentSlide = (n + slides.length) % slides.length;
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        document.querySelector('.carousel-btn.prev').addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+
+        document.querySelector('.carousel-btn.next').addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+
+        indicators.forEach((ind, i) => {
+            ind.addEventListener('click', () => {
+                showSlide(i);
+            });
+        });
+    </script>
+</body>
+</html>

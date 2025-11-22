@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Paket Data - Admin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 1rem;
+        }
+
+        .page-header h1 {
+            color: #333;
+            font-size: 2rem;
+        }
+
+        .btn-create {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.18s, box-shadow 0.18s;
+            font-size: 0.95rem;
+        }
+
+        .btn-create:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.28);
+        }
+
+        .filter-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-group input {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .paket-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .paket-table thead {
+            background: #667eea;
+            color: white;
+        }
+
+        .paket-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .paket-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .paket-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-edit {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #5568d3;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 1rem;
+            }
+
+            .page-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .filter-group {
+                flex-direction: column;
+            }
+
+            .filter-group input {
+                min-width: auto;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            .paket-table th,
+            .paket-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="https://via.placeholder.com/48" alt="TelcoApp">
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="../dashboard.html">Dashboard</a></li>
+                <li><a href="index.html" class="active">Paket Data</a></li>
+                <li><a href="../transaksi/index.html">Transaksi</a></li>
+                <li><a href="../users/index.html">Users</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="#profile" class="icon-link" title="Profile">👤</a>
+                <a href="../../auth/login.html" class="btn-action">Logout</a>
+            </div>
+
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <div class="admin-container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>📦 Kelola Paket Data</h1>
+                <button class="btn-create" onclick="alert('Fitur tambah paket akan dibuat di backend')">+ Paket Baru</button>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-group">
+                    <input type="text" id="searchInput" placeholder="Cari paket..." />
+                    <select style="padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="">Semua Status</option>
+                        <option value="aktif">Aktif</option>
+                        <option value="nonaktif">Non-Aktif</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+                <table class="paket-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Paket</th>
+                            <th>Kuota</th>
+                            <th>Harga</th>
+                            <th>Status</th>
+                            <th>Deskripsi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Paket Hemat</td>
+                            <td>3 GB</td>
+                            <td>Rp 25.000</td>
+                            <td><span class="status-badge status-success">Aktif</span></td>
+                            <td>Internet 3GB/bulan, 4G LTE</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="btn-small btn-edit">Edit</a>
+                                    <a href="#" class="btn-small btn-delete" onclick="return confirm('Hapus paket ini?')">Hapus</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Paket Standar</td>
+                            <td>10 GB</td>
+                            <td>Rp 50.000</td>
+                            <td><span class="status-badge status-success">Aktif</span></td>
+                            <td>Internet 10GB/bulan, 4G LTE</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="btn-small btn-edit">Edit</a>
+                                    <a href="#" class="btn-small btn-delete" onclick="return confirm('Hapus paket ini?')">Hapus</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Paket Premium</td>
+                            <td>30 GB</td>
+                            <td>Rp 100.000</td>
+                            <td><span class="status-badge status-success">Aktif</span></td>
+                            <td>Internet 30GB/bulan, 5G</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="btn-small btn-edit">Edit</a>
+                                    <a href="#" class="btn-small btn-delete" onclick="return confirm('Hapus paket ini?')">Hapus</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../js/utilities.js"></script>
+    <script>
+        // Setup table search
+        setupTableSearch('#searchInput', '.paket-table');
+    </script>
+</body>
+</html>

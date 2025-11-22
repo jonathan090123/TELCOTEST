@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Portal - TelcoApp</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .customer-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .customer-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .customer-logo h1 {
+            color: #667eea;
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .customer-logo p {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .customer-links {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .customer-link {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .customer-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .customer-link-icon {
+            font-size: 1.5rem;
+        }
+
+        .divider {
+            margin: 1.5rem 0;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        .info-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .info-box strong {
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="customer-container">
+        <div class="customer-logo">
+            <h1>🎯 Customer Portal</h1>
+            <p>Kelola paket data dan transaksi Anda</p>
+        </div>
+
+        <div class="customer-links">
+            <a href="dashboard.html" class="customer-link">
+                <span class="customer-link-icon">📊</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="paket-data/index.html" class="customer-link">
+                <span class="customer-link-icon">📦</span>
+                <span>Paket Data</span>
+            </a>
+
+            <a href="transaksi/index.html" class="customer-link">
+                <span class="customer-link-icon">💳</span>
+                <span>Transaksi</span>
+            </a>
+
+            <a href="profile/index.html" class="customer-link">
+                <span class="customer-link-icon">👤</span>
+                <span>Profile</span>
+            </a>
+        </div>
+
+        <div class="divider"></div>
+
+        <a href="../index.html" class="customer-link" style="background: #e9ecef; color: #333;">
+            <span class="customer-link-icon">🏠</span>
+            <span>Kembali ke Beranda</span>
+        </a>
+
+        <div class="info-box">
+            <strong>📝 Akun Demo Customer:</strong><br>
+            Email: user@telcoapp.com<br>
+            Password: password123
+        </div>
+
+        <div class="back-link">
+            <a href="../auth/login.html">← Logout</a>
+        </div>
+    </div>
+</body>
+</html>
