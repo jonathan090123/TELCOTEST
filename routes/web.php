@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 // 👇 PENTING: Import Auth facade agar tidak error saat Auth::logout()
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
@@ -21,6 +22,13 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\Customer\TransaksiController;
 use App\Http\Controllers\MidtransCallbackController;
 
+=======
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PaketDataController;
+use App\Http\Controllers\Admin\PaketDataController as AdminPaketDataController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +36,7 @@ use App\Http\Controllers\MidtransCallbackController;
 |--------------------------------------------------------------------------
 */
 
+<<<<<<< HEAD
 // ================= PUBLIC ROUTES (Bisa diakses siapa saja) =================
 
 // 👇 FIX ERROR 1: Route [about] not defined
@@ -192,3 +201,93 @@ Route::post('/midtrans/callback', [MidtransCallbackController::class, 'callback'
 
 
 
+=======
+// Route untuk halaman utama
+use App\Models\PaketData;
+
+Route::get('/', function () {
+    $paketData = PaketData::where('status', 'active')
+        ->orderBy('harga', 'asc')
+        ->take(4)
+        ->get();
+
+    return view('welcome', compact('paketData'));
+})->name('home');
+
+// Route untuk halaman About
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+// Route untuk Authentication (Guest only)
+Route::middleware('guest')->group(function () {
+    // Login Routes
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+    
+    // Register Routes
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+});
+
+// Route untuk Logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+// Route Paket Data (Public - bisa dilihat tanpa login)
+Route::prefix('paket-data')->name('paket-data.')->group(function () {
+    // Halaman list semua paket (public)
+    Route::get('/', [PaketDataController::class, 'index'])->name('index');
+    
+    // Halaman detail paket (public)
+    Route::get('/{id}', [PaketDataController::class, 'show'])->name('show');
+});
+
+// Route yang memerlukan authentication
+Route::middleware('auth')->group(function () {
+    
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    // Paket Data - Beli & Riwayat (Require Auth)
+    Route::prefix('paket-data')->name('paket-data.')->group(function () {
+        // Halaman beli paket
+        Route::get('/{id}/beli', [PaketDataController::class, 'beliPaket'])->name('beli');
+        Route::post('/{id}/beli', [PaketDataController::class, 'prosesBeliPaket'])->name('beli.proses');
+        
+        // Halaman pembayaran untuk transaksi yang dibuat
+        Route::get('/transaksi/{transaksi}/bayar', [PaketDataController::class, 'showPembayaran'])->name('pembayaran.show');
+        Route::post('/transaksi/{transaksi}/bayar', [PaketDataController::class, 'prosesPembayaran'])->name('pembayaran.proses');
+        
+        // Riwayat pembelian
+        Route::get('/riwayat/pembelian', [PaketDataController::class, 'riwayat'])->name('riwayat');
+    });
+    
+    // Transaksi Customer
+    Route::prefix('transaksi')->name('transaksi.')->group(function () {
+        Route::get('/', [DashboardController::class, 'transaksiCustomer'])->name('index');
+    });
+    
+    // Profile Routes
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [AuthController::class, 'profile'])->name('index');
+        Route::put('/update', [AuthController::class, 'updateProfile'])->name('update');
+        Route::put('/password', [AuthController::class, 'updatePassword'])->name('password');
+    });
+});
+
+// Route untuk admin (jika diperlukan)
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    
+    Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])->name('dashboard');
+    
+    // Manajemen User
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    
+    // Manajemen Transaksi Admin
+    Route::get('/transaksi', [DashboardController::class, 'transaksiIndex'])->name('transaksi.index');
+    
+    // Admin Paket Data CRUD
+    Route::resource('paket-data', AdminPaketDataController::class)->names('paket-data');
+});
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18

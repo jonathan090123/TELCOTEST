@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+<<<<<<< HEAD
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+=======
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,6 +14,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+<<<<<<< HEAD
     protected $fillable = [
         'name',
         'email',
@@ -21,11 +25,32 @@ class User extends Authenticatable
         'device_brand',
     ];
 
+=======
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'password',
+        'role',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
+<<<<<<< HEAD
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
@@ -67,5 +92,34 @@ class User extends Authenticatable
     public function getNomorHpAttribute()
     {
         return $this->attributes['nomor_hp'] ?? ($this->attributes['phone_number'] ?? null);
+=======
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    /**
+     * Relasi dengan transaksi
+     */
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
+
+    /**
+     * Check if user is admin
+     */
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
     }
 }

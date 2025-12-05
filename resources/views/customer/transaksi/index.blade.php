@@ -137,6 +137,7 @@
 @endsection
 
 @section('content')
+<<<<<<< HEAD
     <div class="transaksi-container">
         <div class="transaksi-header">
             <h1>💳 Riwayat Transaksi</h1>
@@ -205,4 +206,73 @@
             </div>
         @endif
     </div>
+=======
+<div class="transaksi-container">
+    <div class="transaksi-header">
+        <h1>💳 Riwayat Transaksi</h1>
+    </div>
+
+        <div class="filter-section">
+        <a href="{{ route('home') }}#paket-data" class="btn">Kembali ke Beranda</a>
+    </div>
+
+    @if($transaksis->count() > 0)
+        <div class="table-container">
+            <table class="transaksi-table">
+                <thead>
+                    <tr>
+                        <th>Kode Transaksi</th>
+                        <th>Paket Data</th>
+                        <th>Harga</th>
+                        <th>Status</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($transaksis as $transaksi)
+                        <tr>
+                            <td>
+                                <strong>{{ $transaksi->kode_transaksi ?? '-' }}</strong>
+                            </td>
+                            <td>
+                                @if($transaksi->paketData)
+                                    {{ $transaksi->paketData->nama }}
+                                @else
+                                    Paket dihapus
+                                @endif
+                            </td>
+                            <td>
+                                Rp {{ number_format($transaksi->harga ?? 0, 0, ',', '.') }}
+                            </td>
+                            <td>
+                                @php
+                                    $status = $transaksi->status ?? 'pending';
+                                    $badgeClass = 'status-' . $status;
+                                @endphp
+                                <span class="status-badge {{ $badgeClass }}">
+                                    {{ ucfirst($status) }}
+                                </span>
+                            </td>
+                            <td>
+                                {{ $transaksi->created_at->format('d M Y H:i') }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    @else
+        <div class="table-container">
+            <div class="empty-state">
+                <div class="empty-state-icon">📭</div>
+                <h3>Belum ada transaksi</h3>
+                <p>Anda belum melakukan pembelian paket data</p>
+                    <div style="margin-top: 1.5rem;">
+                    <a href="{{ route('home') }}#paket-data" class="btn">Beli Paket Data</a>
+                </div>
+            </div>
+        </div>
+    @endif
+</div>
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
 @endsection

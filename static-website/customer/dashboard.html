@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .customer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .customer-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .customer-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .customer-header p {
+            opacity: 0.9;
+        }
+
+        .customer-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+        }
+
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .customer-container {
+                padding: 1rem;
+            }
+
+            .customer-header {
+                padding: 1.5rem;
+            }
+
+            .customer-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="https://via.placeholder.com/48" alt="TelcoApp">
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="../dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="../paket-data/index.html">Paket Data</a></li>
+                <li><a href="../transaksi/index.html">Transaksi</a></li>
+                <li><a href="../profile/index.html">Profile</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="../profile/index.html" class="icon-link" title="Profile">👤</a>
+                <a href="../../auth/login.html" class="btn-action">Logout</a>
+            </div>
+
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <div class="customer-container">
+            <!-- Header -->
+            <div class="customer-header">
+                <h1>Selamat Datang, Customer! 👋</h1>
+                <p>Kelola paket data dan transaksi Anda dengan mudah</p>
+            </div>
+
+            <!-- Statistics -->
+            <div class="customer-stats">
+                <div class="stat-card">
+                    <h3>Paket Aktif</h3>
+                    <div class="number">2</div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Sisa Kuota</h3>
+                    <div class="number">8.5 GB</div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Total Pengeluaran</h3>
+                    <div class="number">Rp 150K</div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Transaksi Bulan Ini</h3>
+                    <div class="number">5</div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2>🔗 Menu Cepat</h2>
+                </div>
+                <div class="quick-links">
+                    <a href="../paket-data/index.html" class="btn btn-primary" style="padding: 1rem; text-align: center;">
+                        📦 Beli Paket
+                    </a>
+                    <a href="../transaksi/index.html" class="btn btn-primary" style="padding: 1rem; text-align: center;">
+                        💳 Riwayat Transaksi
+                    </a>
+                    <a href="../profile/index.html" class="btn btn-primary" style="padding: 1rem; text-align: center;">
+                        👤 Profile
+                    </a>
+                    <a href="../../index.html" class="btn btn-secondary" style="padding: 1rem; text-align: center;">
+                        🏠 Beranda
+                    </a>
+                </div>
+            </div>
+
+            <!-- Information -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2>ℹ️ Informasi Penting</h2>
+                </div>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">
+                        ✓ Paket Anda berlaku hingga 2025-02-22
+                    </li>
+                    <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">
+                        ✓ Kuota bulanan akan direset setiap tanggal 1
+                    </li>
+                    <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">
+                        ✓ Support 24/7 tersedia melalui chat
+                    </li>
+                    <li style="padding: 0.8rem 0;">
+                        ✓ Cek promosi spesial di halaman paket data
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../js/utilities.js"></script>
+</body>
+</html>

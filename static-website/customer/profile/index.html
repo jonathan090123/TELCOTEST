@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Customer</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .customer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: #333;
+            font-size: 2rem;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 1rem;
+            color: white;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-email {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: background 0.3s;
+        }
+
+        .profile-btn:hover {
+            background: #5568d3;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-save {
+            padding: 0.8rem 1.5rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .btn-save:hover {
+            background: #5568d3;
+        }
+
+        .btn-cancel {
+            padding: 0.8rem 1.5rem;
+            background: #e9ecef;
+            color: #333;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .btn-cancel:hover {
+            background: #dee2e6;
+        }
+
+        @media (max-width: 768px) {
+            .customer-container {
+                padding: 1rem;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="https://via.placeholder.com/48" alt="TelcoApp">
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="../dashboard.html">Dashboard</a></li>
+                <li><a href="../paket-data/index.html">Paket Data</a></li>
+                <li><a href="../transaksi/index.html">Transaksi</a></li>
+                <li><a href="index.html" class="active">Profile</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="index.html" class="icon-link" title="Profile">👤</a>
+                <a href="../../auth/login.html" class="btn-action">Logout</a>
+            </div>
+
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <div class="customer-container">
+            <!-- Header -->
+            <div class="page-header">
+                <h1>👤 Profile Saya</h1>
+            </div>
+
+            <!-- Profile Grid -->
+            <div class="profile-grid">
+                <!-- Profile Card -->
+                <div class="profile-card">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-name">John Doe</div>
+                    <div class="profile-email">john@example.com</div>
+                    <button class="profile-btn" onclick="alert('Foto profil akan diupload')">Ubah Foto</button>
+                    <button class="profile-btn" onclick="alert('Konfirmasi penghapusan akun')">Hapus Akun</button>
+                </div>
+
+                <!-- Edit Form -->
+                <div class="form-section">
+                    <div class="section-title">📝 Informasi Pribadi</div>
+                    <form onsubmit="event.preventDefault(); alert('Profil berhasil diperbarui')">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nama Lengkap</label>
+                                <input type="text" id="name" value="John Doe" />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" value="john@example.com" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Nomor Telepon</label>
+                                <input type="tel" id="phone" value="08123456789" />
+                            </div>
+                            <div class="form-group">
+                                <label for="dob">Tanggal Lahir</label>
+                                <input type="date" id="dob" value="1990-05-15" />
+                            </div>
+                        </div>
+
+                        <div class="form-row" style="grid-template-columns: 1fr;">
+                            <div class="form-group">
+                                <label for="address">Alamat</label>
+                                <textarea id="address">Jl. Contoh No. 123, Jakarta</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-save">Simpan Perubahan</button>
+                            <button type="button" class="btn-cancel" onclick="alert('Perubahan dibatalkan')">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Security Section -->
+            <div class="form-section">
+                <div class="section-title">🔐 Keamanan</div>
+                <div style="margin-bottom: 1rem;">
+                    <button class="profile-btn" onclick="alert('Halaman ubah password akan dibuka')" style="width: 200px; text-align: center;">Ubah Password</button>
+                </div>
+                <p style="color: #666; font-size: 0.9rem;">
+                    Terakhir login: 2025-01-22 10:30<br>
+                    Session aktif: Chrome, Windows 10
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../js/utilities.js"></script>
+</body>
+</html>

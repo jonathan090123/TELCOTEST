@@ -204,7 +204,11 @@
 
         <div class="stat-card">
             <h3>📦 Total Produk</h3>
+<<<<<<< HEAD
             <div class="number">{{ App\Models\Product::count() }}</div>
+=======
+            <div class="number">{{ App\Models\PaketData::count() }}</div>
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
             <div class="description">Jumlah paket data tersedia di katalog</div>
         </div>
     </div>

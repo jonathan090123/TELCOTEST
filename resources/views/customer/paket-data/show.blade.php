@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+<<<<<<< HEAD
 {{-- Gunakan $paket->product_name karena tabel baru 'products' --}}
 @section('title', $paket->product_name)
 
@@ -31,10 +32,97 @@
         .detail-card {
             background: white; border-radius: 15px; overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+=======
+@section('title', $paket->nama)
+
+@section('extra-styles')
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: #333333;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            padding: 0.375rem 0.65rem;
+            border-radius: 8px;
+            border: 1px solid #e6e9f5;
+            transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+        }
+
+        .back-link:hover {
+            background: #ffffff;
+            border-color: #d6dbf7;
+            transform: translateY(-1px);
+            text-decoration: none;
+        }
+
+        .back-link .icon {
+            display: inline-block;
+            color: #667eea;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .detail-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
         }
 
         .card-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+<<<<<<< HEAD
             color: white; padding: 2rem 1.5rem; text-align: center;
         }
 
@@ -106,24 +194,197 @@
             .card-header h1 { font-size: 1.5rem; }
             .card-header .price { font-size: 2rem; }
             .action-buttons { flex-direction: column; }
+=======
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .package-icon {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .card-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-header .price {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-header .price small {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .card-body {
+            padding: 3rem 2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-item h3 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-item p {
+            color: #666;
+        }
+
+        .description {
+            margin-bottom: 2rem;
+        }
+
+        .description h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .description p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            color: #333;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .card-header h1 {
+                font-size: 2rem;
+            }
+
+            .card-header .price {
+                font-size: 2.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
         }
     </style>
 @endsection
 
 @section('content')
+<<<<<<< HEAD
     <div class="container">
         <a href="{{ route('home') }}#paket-data" class="back-link">
             ← Kembali ke Daftar Paket
+=======
+        <a href="{{ route('home') }}#paket-data" class="back-link">
+            <span class="icon">←</span>
+            <span>Kembali ke Daftar Paket</span>
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
         </a>
 
         <div class="detail-card">
             <div class="card-header">
                 <div class="package-icon">📱</div>
+<<<<<<< HEAD
                 <h1>{{ $paket->product_name }}</h1>
                 
                 <div class="price">
                     Rp {{ number_format($paket->price, 0, ',', '.') }}
                     <small>/bulan</small> 
+=======
+                <h1>{{ $paket->nama }}</h1>
+                <div class="price">
+                    Rp {{ number_format($paket->harga, 0, ',', '.') }}
+                    <small>/{{ $paket->masa_aktif }} hari</small>
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
                 </div>
             </div>
 
@@ -131,6 +392,7 @@
                 <div class="info-grid">
                     <div class="info-item">
                         <div class="icon">📊</div>
+<<<<<<< HEAD
                         <h3>{{ $paket->ml_category }}</h3>
                         <p>Kategori</p>
                     </div>
@@ -138,6 +400,15 @@
                         <div class="icon">📶</div>
                         <h3>{{ $paket->operator }}</h3>
                         <p>Operator</p>
+=======
+                        <h3>{{ $paket->kuota }}</h3>
+                        <p>Total Kuota</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="icon">⏰</div>
+                        <h3>{{ $paket->masa_aktif }}</h3>
+                        <p>Hari Aktif</p>
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
                     </div>
                     <div class="info-item">
                         <div class="icon">⚡</div>
@@ -146,27 +417,47 @@
                     </div>
                 </div>
 
+<<<<<<< HEAD
                 @if($paket->description)
                     <div class="description">
                         <h2>Deskripsi Paket</h2>
                         <p>{{ $paket->description }}</p>
+=======
+                @if($paket->deskripsi)
+                    <div class="description">
+                        <h2>Deskripsi Paket</h2>
+                        <p>{{ $paket->deskripsi }}</p>
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
                     </div>
                 @endif
 
                 <div class="description">
                     <h2>Keuntungan Paket Ini</h2>
                     <ul class="features-list">
+<<<<<<< HEAD
                         <li>Kategori: {{ $paket->ml_category }}</li>
                         <li>Operator: {{ $paket->operator }}</li>
                         <li>Aktivasi otomatis setelah pembayaran</li>
                         <li>Jaringan 4G LTE tercepat</li>
                         <li>Customer support 24/7</li>
+=======
+                        <li>Kuota internet {{ $paket->kuota }}</li>
+                        <li>Masa aktif {{ $paket->masa_aktif }} hari</li>
+                        <li>Aktivasi otomatis setelah pembayaran</li>
+                        <li>Jaringan 4G LTE tercepat</li>
+                        <li>Customer support 24/7</li>
+                        <li>Bisa digunakan untuk semua aplikasi</li>
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
                     </ul>
                 </div>
 
                 <div class="action-buttons">
                     @auth
+<<<<<<< HEAD
                         <a href="{{ route('customer.transaksi.create', $paket->id) }}" class="btn btn-primary">
+=======
+                        <a href="{{ route('paket-data.beli', $paket->id) }}" class="btn btn-primary">
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
                             🛒 Beli Paket Ini
                         </a>
                     @else
@@ -174,7 +465,10 @@
                             🔐 Login untuk Membeli
                         </a>
                     @endauth
+<<<<<<< HEAD
                     
+=======
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
                     <a href="{{ route('home') }}#paket-data" class="btn btn-secondary">
                         Lihat Paket Lain
                     </a>
@@ -182,4 +476,8 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18

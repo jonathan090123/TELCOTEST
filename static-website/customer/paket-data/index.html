@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paket Data - Customer</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .customer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #666;
+        }
+
+        .paket-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .paket-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .paket-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .paket-card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .paket-card-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .paket-card-body {
+            padding: 1.5rem;
+        }
+
+        .paket-quota {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .paket-price {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .paket-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .paket-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .paket-features li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .paket-button {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .paket-button:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .customer-container {
+                padding: 1rem;
+            }
+
+            .paket-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="https://via.placeholder.com/48" alt="TelcoApp">
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="../dashboard.html">Dashboard</a></li>
+                <li><a href="index.html" class="active">Paket Data</a></li>
+                <li><a href="../transaksi/index.html">Transaksi</a></li>
+                <li><a href="../profile/index.html">Profile</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="../profile/index.html" class="icon-link" title="Profile">👤</a>
+                <a href="../../auth/login.html" class="btn-action">Logout</a>
+            </div>
+
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <div class="customer-container">
+            <!-- Header -->
+            <div class="page-header">
+                <h1>📦 Paket Data Kami</h1>
+                <p>Pilih paket yang sesuai dengan kebutuhan Anda</p>
+            </div>
+
+            <!-- Paket Cards -->
+            <div class="paket-grid">
+                <!-- Paket 1 -->
+                <div class="paket-card">
+                    <div class="paket-card-header">
+                        <h2>Paket Hemat</h2>
+                    </div>
+                    <div class="paket-card-body">
+                        <div class="paket-quota">3 GB</div>
+                        <div class="paket-price">Rp 25.000</div>
+                        <ul class="paket-features">
+                            <li>Internet 3GB/bulan</li>
+                            <li>Kecepatan 4G LTE</li>
+                            <li>Berlaku 30 hari</li>
+                            <li>Support 24/7</li>
+                        </ul>
+                        <button class="paket-button" onclick="alert('Paket telah ditambahkan ke keranjang')">Beli Sekarang</button>
+                    </div>
+                </div>
+
+                <!-- Paket 2 -->
+                <div class="paket-card">
+                    <div class="paket-card-header">
+                        <h2>Paket Standar</h2>
+                    </div>
+                    <div class="paket-card-body">
+                        <div class="paket-quota">10 GB</div>
+                        <div class="paket-price">Rp 50.000</div>
+                        <ul class="paket-features">
+                            <li>Internet 10GB/bulan</li>
+                            <li>Kecepatan 4G LTE</li>
+                            <li>Berlaku 30 hari</li>
+                            <li>Bonus kuota sosmed</li>
+                            <li>Support 24/7</li>
+                        </ul>
+                        <button class="paket-button" onclick="alert('Paket telah ditambahkan ke keranjang')">Beli Sekarang</button>
+                    </div>
+                </div>
+
+                <!-- Paket 3 -->
+                <div class="paket-card">
+                    <div class="paket-card-header">
+                        <h2>Paket Premium</h2>
+                    </div>
+                    <div class="paket-card-body">
+                        <div class="paket-quota">30 GB</div>
+                        <div class="paket-price">Rp 100.000</div>
+                        <ul class="paket-features">
+                            <li>Internet 30GB/bulan</li>
+                            <li>Kecepatan 5G</li>
+                            <li>Berlaku 30 hari</li>
+                            <li>Bonus kuota unlimited</li>
+                            <li>Support Priority 24/7</li>
+                        </ul>
+                        <button class="paket-button" onclick="alert('Paket telah ditambahkan ke keranjang')">Beli Sekarang</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); margin-top: 2rem;">
+                <h3 style="color: #667eea; margin-bottom: 1rem;">❓ Pertanyaan Umum</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">
+                        <strong>Berapa lama paket berlaku?</strong>
+                        <p style="color: #666; margin-top: 0.3rem;">Semua paket berlaku selama 30 hari dari tanggal pembelian.</p>
+                    </li>
+                    <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">
+                        <strong>Apakah kuota dapat digunakan di luar negeri?</strong>
+                        <p style="color: #666; margin-top: 0.3rem;">Tergantung pada roaming agreement dan paket roaming yang Anda miliki.</p>
+                    </li>
+                    <li style="padding: 0.8rem 0;">
+                        <strong>Bagaimana jika kuota habis?</strong>
+                        <p style="color: #666; margin-top: 0.3rem;">Anda dapat membeli paket tambahan atau menunggu sampai paket direset di bulan berikutnya.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../js/utilities.js"></script>
+</body>
+</html>

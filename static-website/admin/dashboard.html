@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header-left h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+
+        .admin-header-left p {
+            opacity: 0.95;
+            font-size: 1rem;
+        }
+
+        .greeting-time {
+            text-align: right;
+        }
+
+        .greeting-time .time {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .description {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-header h2 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .greeting-time {
+                text-align: center;
+            }
+
+            .admin-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="https://via.placeholder.com/48" alt="TelcoApp">
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Dashboard</a></li>
+                <li><a href="../paket-data/index.html">Paket Data</a></li>
+                <li><a href="../transaksi/index.html">Transaksi</a></li>
+                <li><a href="../users/index.html">Users</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="#profile" class="icon-link" title="Profile">👤</a>
+                <a href="../../auth/login.html" class="btn-action">Logout</a>
+            </div>
+
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <div class="admin-container">
+            <!-- Header -->
+            <div class="admin-header">
+                <div class="admin-header-left">
+                    <h1>Dashboard Admin</h1>
+                    <p>Selamat datang kembali!</p>
+                </div>
+                <div class="greeting-time">
+                    <div>Sekarang:</div>
+                    <div class="time" id="currentTime">--:--:--</div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <h3>Total Pengguna</h3>
+                    <div class="number">2,450</div>
+                    <div class="description">+150 minggu ini</div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Total Transaksi</h3>
+                    <div class="number">15,320</div>
+                    <div class="description">+1,200 bulan ini</div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Total Pendapatan</h3>
+                    <div class="number">Rp 125.5M</div>
+                    <div class="description">+Rp 15.2M minggu ini</div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Paket Aktif</h3>
+                    <div class="number">42</div>
+                    <div class="description">5 paket baru</div>
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2>📊 Ringkasan Aktivitas</h2>
+                </div>
+                <p style="color: #666; margin-bottom: 1rem;">Statistik sistem untuk bulan ini sedang diproses...</p>
+                <p style="color: #999; font-size: 0.9rem;">Data real-time akan ditampilkan di sini. Untuk data lengkap, silakan kunjungi halaman laporan.</p>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2>🔗 Menu Cepat</h2>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <a href="../paket-data/index.html" class="btn btn-primary" style="text-align: center; padding: 1rem; display: block;">
+                        Kelola Paket Data
+                    </a>
+                    <a href="../transaksi/index.html" class="btn btn-primary" style="text-align: center; padding: 1rem; display: block;">
+                        Lihat Transaksi
+                    </a>
+                    <a href="../users/index.html" class="btn btn-primary" style="text-align: center; padding: 1rem; display: block;">
+                        Kelola Users
+                    </a>
+                    <a href="../../index.html" class="btn btn-secondary" style="text-align: center; padding: 1rem; display: block;">
+                        Kembali Ke Beranda
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../js/utilities.js"></script>
+    <script>
+        // Update current time
+        updateCurrentTime('currentTime');
+    </script>
+</body>
+</html>

@@ -12,17 +12,38 @@ class PaketData extends Model
     protected $table = 'paket_data';
 
     protected $fillable = [
+<<<<<<< HEAD
+=======
+        // legacy fields
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
         'nama',
         'kuota',
         'masa_aktif',
         'harga',
         'deskripsi',
         'status',
+<<<<<<< HEAD
+=======
+        // new schema fields
+        'product_name',
+        'ml_category',
+        'operator',
+        'price',
+        'description',
+        'image_url',
+        'is_popular',
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
     ];
 
     protected $casts = [
         'harga' => 'decimal:2',
+<<<<<<< HEAD
         'masa_aktif' => 'integer',
+=======
+        'price' => 'decimal:2',
+        'masa_aktif' => 'integer',
+        'is_popular' => 'boolean',
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
     ];
 
     /**
@@ -38,7 +59,16 @@ class PaketData extends Model
      */
     public function getFormattedHargaAttribute()
     {
+<<<<<<< HEAD
         return 'Rp ' . number_format($this->harga, 0, ',', '.');
+=======
+        return 'Rp ' . number_format($this->harga ?? $this->price ?? 0, 0, ',', '.');
+    }
+
+    public function getFormattedPriceAttribute()
+    {
+        return 'Rp ' . number_format($this->price ?? $this->harga ?? 0, 0, ',', '.');
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
     }
 
     /**

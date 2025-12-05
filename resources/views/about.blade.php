@@ -116,7 +116,11 @@
             <div class="about-section">
                 <h2>🌟 Apa itu TelcoApp?</h2>
                 <p>
+<<<<<<< HEAD
                     TelcoApp adalah platform terpercaya untuk pembelian paket data internet dengan harga terjangkau dan proses yang mudah.
+=======
+                    TelcoApp adalah platform terpercaya untuk pembelian paket data internet dengan harga terjangkau dan proses yang mudah. 
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
                     Kami berkomitmen memberikan layanan terbaik dengan dukungan pelanggan 24/7.
                 </p>
             </div>
@@ -124,7 +128,11 @@
             <div class="about-section">
                 <h2>💡 Visi Kami</h2>
                 <p>
+<<<<<<< HEAD
                     Menjadi penyedia layanan paket data terdepan yang memberikan akses internet berkualitas tinggi kepada seluruh masyarakat
+=======
+                    Menjadi penyedia layanan paket data terdepan yang memberikan akses internet berkualitas tinggi kepada seluruh masyarakat 
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
                     Indonesia dengan harga yang kompetitif dan terjangkau.
                 </p>
             </div>
@@ -132,7 +140,11 @@
             <div class="about-section">
                 <h2>🎯 Misi Kami</h2>
                 <p>
+<<<<<<< HEAD
                     Memberikan solusi konektivitas internet yang inovatif, aman, dan terpercaya dengan fokus pada kepuasan pelanggan,
+=======
+                    Memberikan solusi konektivitas internet yang inovatif, aman, dan terpercaya dengan fokus pada kepuasan pelanggan, 
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
                     transparansi harga, dan layanan purna jual yang responsif.
                 </p>
             </div>

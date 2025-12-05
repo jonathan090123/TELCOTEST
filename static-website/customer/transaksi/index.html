@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Transaksi - Customer</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .customer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: #333;
+            font-size: 2rem;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table thead {
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        table thead th {
+            padding: 1rem;
+            text-align: left;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        table tbody tr:hover {
+            background: #f8f9ff;
+        }
+
+        table tbody td {
+            padding: 1rem;
+            color: #333;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 768px) {
+            .customer-container {
+                padding: 1rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            table thead th,
+            table tbody td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="https://via.placeholder.com/48" alt="TelcoApp">
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="../dashboard.html">Dashboard</a></li>
+                <li><a href="../paket-data/index.html">Paket Data</a></li>
+                <li><a href="index.html" class="active">Transaksi</a></li>
+                <li><a href="../profile/index.html">Profile</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="../profile/index.html" class="icon-link" title="Profile">👤</a>
+                <a href="../../auth/login.html" class="btn-action">Logout</a>
+            </div>
+
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <div class="customer-container">
+            <!-- Header -->
+            <div class="page-header">
+                <h1>💳 Riwayat Transaksi</h1>
+                <p style="color: #666; margin-top: 0.5rem;">Kelola semua transaksi Anda</p>
+            </div>
+
+            <!-- Table -->
+            <div class="content-section">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>ID Transaksi</th>
+                                <th>Paket</th>
+                                <th>Jumlah</th>
+                                <th>Status</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>#TRX001</td>
+                                <td>Paket Premium - 30GB</td>
+                                <td>Rp 100.000</td>
+                                <td><span class="status-badge status-success">Berhasil</span></td>
+                                <td>2025-01-20 10:30</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Detail transaksi')">Detail</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>#TRX002</td>
+                                <td>Paket Standar - 10GB</td>
+                                <td>Rp 50.000</td>
+                                <td><span class="status-badge status-success">Berhasil</span></td>
+                                <td>2025-01-15 14:45</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Detail transaksi')">Detail</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>#TRX003</td>
+                                <td>Paket Hemat - 3GB</td>
+                                <td>Rp 25.000</td>
+                                <td><span class="status-badge status-success">Berhasil</span></td>
+                                <td>2025-01-10 09:15</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Detail transaksi')">Detail</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>#TRX004</td>
+                                <td>Paket Premium - 30GB</td>
+                                <td>Rp 100.000</td>
+                                <td><span class="status-badge status-pending">Menunggu</span></td>
+                                <td>2025-01-22 16:20</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Detail transaksi')">Detail</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../js/utilities.js"></script>
+</body>
+</html>

@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "c92b4b280ae168b84d162b7d3c3d1423",
+=======
+    "content-hash": "a59389decc3f6069f384f7a80bf3f0f9",
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
     "packages": [
         {
             "name": "brick/math",
@@ -2009,6 +2013,7 @@
             "time": "2024-12-08T08:18:47+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "midtrans/midtrans-php",
             "version": "2.6.2",
             "source": {
@@ -2070,6 +2075,8 @@
             "time": "2025-03-18T06:30:17+00:00"
         },
         {
+=======
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
             "name": "monolog/monolog",
             "version": "3.9.0",
             "source": {
@@ -9407,12 +9414,20 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
+<<<<<<< HEAD
     "stability-flags": [],
+=======
+    "stability-flags": {},
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
+<<<<<<< HEAD
     "platform-dev": [],
+=======
+    "platform-dev": {},
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
     "plugin-api-version": "2.6.0"
 }

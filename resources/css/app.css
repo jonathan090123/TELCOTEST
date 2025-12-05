@@ -8,6 +8,7 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+<<<<<<< HEAD
 }
 
 html {
@@ -42,4 +43,8 @@ html {
 .step-group-bottom {
     @apply absolute left-1/2 -translate-x-1/2 flex items-center gap-2;
     bottom: -28px;
+=======
+
+
+>>>>>>> 0eab01df4ad7438c9172a090608b763634bb7e18
 }

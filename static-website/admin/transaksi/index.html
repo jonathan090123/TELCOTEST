@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Transaksi - Admin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .transaksi-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .transaksi-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .transaksi-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .transaksi-header p {
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        .stat-info {
+            text-align: right;
+        }
+
+        .stat-info .number {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .stat-info .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.3rem;
+        }
+
+        .transaksi-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table thead {
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        table thead th {
+            padding: 1.2rem;
+            text-align: left;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        table tbody tr:hover {
+            background: #f8f9ff;
+        }
+
+        table tbody td {
+            padding: 1.2rem;
+            color: #333;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .transaksi-header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .stat-info {
+                text-align: center;
+            }
+
+            .transaksi-container {
+                padding: 1rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            table thead th,
+            table tbody td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="https://via.placeholder.com/48" alt="TelcoApp">
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="../dashboard.html">Dashboard</a></li>
+                <li><a href="../paket-data/index.html">Paket Data</a></li>
+                <li><a href="index.html" class="active">Transaksi</a></li>
+                <li><a href="../users/index.html">Users</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="#profile" class="icon-link" title="Profile">👤</a>
+                <a href="../../auth/login.html" class="btn-action">Logout</a>
+            </div>
+
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <div class="transaksi-container">
+            <!-- Header -->
+            <div class="transaksi-header">
+                <div>
+                    <h1>💳 Manajemen Transaksi</h1>
+                    <p>Kelola semua transaksi pengguna</p>
+                </div>
+                <div class="stat-info">
+                    <div class="number">125</div>
+                    <div class="label">Transaksi Hari Ini</div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="transaksi-content">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>ID Transaksi</th>
+                                <th>Email Pengguna</th>
+                                <th>Paket</th>
+                                <th>Jumlah</th>
+                                <th>Status</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>#TRX001</td>
+                                <td>user@example.com</td>
+                                <td>Paket Hemat - 3GB</td>
+                                <td>Rp 25.000</td>
+                                <td><span class="status-badge status-success">Berhasil</span></td>
+                                <td>2025-01-22 10:30</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Detail transaksi')">Detail</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>#TRX002</td>
+                                <td>admin@example.com</td>
+                                <td>Paket Premium - 30GB</td>
+                                <td>Rp 100.000</td>
+                                <td><span class="status-badge status-pending">Menunggu</span></td>
+                                <td>2025-01-22 11:15</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Detail transaksi')">Detail</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>#TRX003</td>
+                                <td>customer@example.com</td>
+                                <td>Paket Standar - 10GB</td>
+                                <td>Rp 50.000</td>
+                                <td><span class="status-badge status-success">Berhasil</span></td>
+                                <td>2025-01-21 15:45</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Detail transaksi')">Detail</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>#TRX004</td>
+                                <td>test@example.com</td>
+                                <td>Paket Hemat - 3GB</td>
+                                <td>Rp 25.000</td>
+                                <td><span class="status-badge status-failed">Gagal</span></td>
+                                <td>2025-01-21 12:20</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Detail transaksi')">Detail</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../js/utilities.js"></script>
+</body>
+</html>
