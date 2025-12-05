@@ -1,0 +1,45 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@keyframes fadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeSlideIn {
+    animation: fadeSlideIn 0.35s ease-out forwards;
+}
+
+.step-bubble {
+    @apply w-10 h-10 flex items-center justify-center rounded-full bg-white text-blue-700 font-bold shadow-lg border-2 border-blue-700;
+}
+
+.step-group-top {
+    @apply absolute left-1/2 -translate-x-1/2 flex items-center gap-2;
+    top: -28px;
+}
+
+.step-group-bottom {
+    @apply absolute left-1/2 -translate-x-1/2 flex items-center gap-2;
+    bottom: -28px;
+}
